@@ -1,5 +1,5 @@
 import { Header } from "@/components/Header";
-import { Hero2 } from "@/components/Hero2";
+import { Hero } from "@/components/Hero";
 import { Scatter, Statement } from "@/components/Statement";
 import { NameGrid, Settle } from "@/components/Name";
 import { Belmere, Luna, Services } from "@/components/Work";
@@ -7,13 +7,13 @@ import { Coast, Quote, Sprezz } from "@/components/Story";
 import { About, Footer } from "@/components/About";
 import { CalLoader } from "@/components/fx";
 
-// v2: same page, but the hero keeps all type off the photo.
+// v2: same page, hero without the giant LÉON / CA / PRI.
 export default function HomeV2() {
   return (
     <>
       <Header />
       <main>
-        <Hero2 />
+        <Hero word={false} />
         <Statement />
         <Scatter />
         <NameGrid />

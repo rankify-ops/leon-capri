@@ -22,7 +22,7 @@ function Word({ children, delay, className }: { children: string; delay: number;
   );
 }
 
-export function Ticks({ delay }: { delay: number }) {
+function Ticks({ delay }: { delay: number }) {
   const [on, setOn] = useState(0);
   useEffect(() => {
     let i = 0;
@@ -47,7 +47,8 @@ export function Ticks({ delay }: { delay: number }) {
   );
 }
 
-export function Hero() {
+/** `word={false}` (/v2) drops the giant LÉON / CA / PRI; everything else is identical. */
+export function Hero({ word = true }: { word?: boolean }) {
   const wrap = useRef<HTMLDivElement>(null);
   const vid = useRef<HTMLVideoElement>(null);
   const { scrollYProgress: p } = useScroll({ target: wrap, offset: ["start start", "end start"] });
@@ -105,7 +106,8 @@ export function Hero() {
         </motion.p>
 
         <motion.div style={{ y: liftY, opacity: liftO }} className="absolute inset-0">
-          {/* Giant stacked wordmark. */}
+          {/* Giant stacked wordmark (v1 only; v2 keeps a hidden h1 for SEO). */}
+          {word ? (
           <h1 aria-label="LÉONCAPRI" className="text-[27vw] md:text-[20.5vw]">
             <Word delay={0.35} className="left-[3vw] top-[27svh] md:top-[5vh]">
               {hero.word[0]}
@@ -117,6 +119,9 @@ export function Hero() {
               {hero.word[2]}
             </Word>
           </h1>
+          ) : (
+            <h1 className="sr-only">LÉONCAPRI</h1>
+          )}
 
           {/* Top-right statement, typed. */}
           <div className="absolute right-4 top-[62px] text-right md:right-6 md:top-[100px]">
