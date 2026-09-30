@@ -109,7 +109,7 @@ export function Coast() {
       <div className="relative md:h-[210vh]">
         <div className="md:sticky md:top-0 md:grid md:h-[100svh] md:grid-cols-2">
           <div className="relative h-[70svh] overflow-hidden md:h-full">
-            <Img slug="coast-ext" alt="Coast — North Wollongong" className="bw h-full w-full object-cover" sizes="50vw" />
+            <Img slug="coast-ext" alt="Coast — North Wollongong" className="bw h-full w-full object-cover object-[33%_50%]" sizes="50vw" />
           </div>
           <div className="px flex flex-col pb-8 pt-10 md:pt-24">
             <h2 className="d text-[clamp(52px,5.6vw,92px)]">

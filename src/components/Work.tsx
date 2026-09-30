@@ -66,7 +66,7 @@ export function Luna() {
       </div>
 
       <div className="relative h-[80svh] overflow-hidden md:h-auto">
-        <Img slug="luna" alt="Luna — Huskisson brand identity" className="bw h-full w-full object-cover" sizes="50vw" />
+        <Img slug="luna" alt="Luna — Huskisson brand identity" className="bw h-full w-full object-cover object-[88%_50%]" sizes="50vw" />
         <motion.div style={{ width: line }} className="absolute right-0 top-[74%] h-[3px] bg-accent" />
         <motion.p
           style={{ filter: blur, opacity: tagO, scale: tagS }}
@@ -143,8 +143,8 @@ export function Belmere() {
 
   return (
     <section ref={ref} className="relative z-10 bg-grey text-ink md:grid md:grid-cols-[46%_54%]">
-      <div className="relative h-[100svh] overflow-hidden md:sticky md:top-0">
-        <Img slug="belmere" alt="Belmeré — brand identity" className="bw h-full w-full object-cover object-[30%_50%]" sizes="46vw" />
+      <div className="relative h-[62svh] overflow-hidden md:sticky md:top-0 md:h-[100svh]">
+        <Img slug="belmere" alt="Belmeré — brand identity" className="bw h-full w-full object-cover object-[50%_50%]" sizes="46vw" />
         <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(255,255,255,0.85),rgba(255,255,255,0)_40%)]" />
         <ul className="px absolute left-0 top-20 text-[11px] font-bold uppercase leading-[1.15] text-white md:top-24 md:text-[13px]">
           {belmere.side.map((s) => (

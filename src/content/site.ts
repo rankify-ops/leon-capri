@@ -51,14 +51,14 @@ export const statement = {
 
 // Scattered gallery — real LÉONCAPRI brands.
 export const scatter = [
-  { slug: "luna", cap: "Luna — Huskisson", x: 70, w: 21, speed: 0.35, top: 2 },
-  { slug: "noir", cap: "Noir", x: 18, w: 22, speed: 0.15, top: 6 },
-  { slug: "otto", cap: "Otto", x: 1, w: 15, speed: 0.55, top: 24 },
-  { slug: "coast-ext", cap: "Coast — North Wollongong", x: 44, w: 19, speed: 0.25, top: 30 },
-  { slug: "silk", cap: "Silk", x: 78, w: 17, speed: 0.45, top: 44 },
-  { slug: "mara", cap: "Mára", x: 22, w: 20, speed: 0.3, top: 56 },
-  { slug: "raya", cap: "Raya", x: 1, w: 21, speed: 0.6, top: 76 },
-  { slug: "knightsbridge", cap: "Knightsbridge", x: 58, w: 22, speed: 0.2, top: 72 },
+  { slug: "luna", cap: "Luna — Huskisson", x: 64, w: 30, speed: 0.35, top: 2 },
+  { slug: "noir", cap: "Noir", x: 14, w: 28, speed: 0.15, top: 8 },
+  { slug: "otto", cap: "Otto", x: 1, w: 22, speed: 0.55, top: 26 },
+  { slug: "coast-ext", cap: "Coast — North Wollongong", x: 40, w: 26, speed: 0.25, top: 32 },
+  { slug: "silk", cap: "Silk", x: 74, w: 24, speed: 0.45, top: 46 },
+  { slug: "mara", cap: "Mára", x: 18, w: 26, speed: 0.3, top: 56 },
+  { slug: "raya", cap: "Raya", x: 1, w: 24, speed: 0.6, top: 78 },
+  { slug: "knightsbridge", cap: "Knightsbridge", x: 56, w: 30, speed: 0.2, top: 72 },
 ];
 
 export const name = {

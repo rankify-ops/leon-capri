@@ -50,11 +50,23 @@ function Floater({ s, i }: { s: (typeof scatter)[number]; i: number }) {
   return (
     <motion.figure
       ref={ref}
-      style={{ left: `${s.x}%`, top: `${s.top}%`, width: `${s.w}%`, y, scale }}
-      className="bw-hover absolute min-w-[108px] origin-bottom"
+      style={
+        {
+          "--l": `${s.x}%`,
+          "--w": `${s.w}%`,
+          // Phones: tiles 1.7× wider, pulled in so they never run off the edge.
+          "--lm": `${Math.max(0, Math.min(s.x, 98 - s.w * 1.7))}%`,
+          "--wm": `${Math.min(s.w * 1.7, 62)}%`,
+          top: `${s.top}%`,
+          y,
+          scale,
+        } as unknown as React.CSSProperties
+      }
+      className="bw-hover absolute left-[var(--lm)] w-[var(--wm)] origin-bottom md:left-[var(--l)] md:w-[var(--w)]"
     >
-      <div className="aspect-[3/4] overflow-hidden bg-bg-2">
-        <Img slug={s.slug} alt={s.cap} className="bw h-full w-full object-cover" sizes="20vw" />
+      {/* Natural aspect — never crop the brand marks out of the work. */}
+      <div className="overflow-hidden bg-bg-2">
+        <Img slug={s.slug} alt={s.cap} className="bw h-auto w-full" sizes="25vw" />
       </div>
       <figcaption className="mono mt-2 text-[9px] text-fg-2 md:text-[10px]">
         {s.cap} <span className="text-fg-3">({String(i + 1).padStart(2, "0")})</span>
