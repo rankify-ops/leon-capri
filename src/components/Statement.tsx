@@ -21,9 +21,9 @@ export function Statement() {
           <div className="aspect-[3/4] overflow-hidden bg-bg-2">
             <Img slug="insight" alt="Insight — brand by LÉONCAPRI" className="bw h-full w-full object-cover" sizes="300px" />
           </div>
-          <p className="d2 text-[clamp(20px,3.3vw,46px)] leading-[1] text-grey">{words.slice(0, SPLIT).join(" ")}</p>
+          <p className="d2 text-[clamp(20px,3.3vw,46px)] leading-[1] text-fg-2">{words.slice(0, SPLIT).join(" ")}</p>
         </div>
-        <p className="d2 mt-3 text-[clamp(20px,3.3vw,46px)] leading-[1] text-grey">{statement.big2}</p>
+        <p className="d2 mt-3 text-[clamp(20px,3.3vw,46px)] leading-[1] text-fg-2">{statement.big2}</p>
 
         <div className="mt-10 md:mt-14">
           <p className="d2 text-[clamp(26px,3.3vw,48px)] text-accent">

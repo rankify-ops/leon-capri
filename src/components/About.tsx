@@ -66,7 +66,7 @@ export function About() {
           <p className="mt-6 text-[10px] font-semibold uppercase text-fg-3">Contact</p>
           <div className="mt-3 flex gap-4">
             {SOCIALS.map((s) => (
-              <a key={s.label} href={s.href} target={s.href.startsWith("http") ? "_blank" : undefined} rel="noopener" aria-label={s.label} className="text-fg transition-colors hover:text-accent">
+              <a key={s.label} href={s.href} target={s.href.startsWith("http") ? "_blank" : undefined} rel="noopener" aria-label={s.label} className="text-fg transition-opacity hover:opacity-50">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.3" aria-hidden>
                   <path d={s.d} />
                 </svg>

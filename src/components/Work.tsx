@@ -125,7 +125,7 @@ export function Services() {
               <span className="absolute right-0 top-0 text-[22px] text-fg-3 transition-transform duration-500 hover:translate-x-1">→</span>
             </div>
             <span className="hidden w-[5px] bg-white/20 md:block" />
-            <ScrollText className="d2 text-[clamp(22px,2.3vw,36px)] leading-[1]" parts={r.parts} />
+            <ScrollText className="d2 text-[clamp(22px,2.3vw,36px)] leading-[1]" parts={r.parts} color="#8a8d92" />
           </div>
         ))}
       </div>

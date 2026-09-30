@@ -216,7 +216,7 @@ export function CalLoader() {
         theme: "dark",
         hideEventTypeDetails: false,
         layout: "month_view",
-        cssVarsPerTheme: { dark: { "cal-brand": "#81ff2c" } },
+        cssVarsPerTheme: { dark: { "cal-brand": "#f3f3f3" } },
       });
     };
     if (W.requestIdleCallback) W.requestIdleCallback(start);

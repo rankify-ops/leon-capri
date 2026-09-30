@@ -139,7 +139,7 @@ export function Coast() {
               </p>
               <p className="d2 mt-1 text-[clamp(34px,3.2vw,52px)]">
                 {coast.concept[0]}
-                <span className="text-accent">/</span>
+                <span className="text-ink/35">/</span>
                 <br />
                 <span className="text-ink/45">{coast.concept[1]}</span>
               </p>

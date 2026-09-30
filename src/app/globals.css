@@ -2,10 +2,11 @@
 
 /*
  * LÉONCAPRI — rebuilt on the vertical.framer.media system.
- * Near-black ground, one electric accent, Inter set tight and uppercase for
- * display, a mono for every caption, light-grey and off-white panels that
- * slide over the dark. Photography is shown black-and-white (colour on hover)
- * so the accent is the only colour on the page.
+ * Near-black ground, strictly monochrome: white carries emphasis, grey
+ * carries everything secondary. Inter set tight and uppercase for display,
+ * a mono for every caption, white, light-grey and off-white panels that slide
+ * over the dark. Photography is black-and-white (colour on hover) — the
+ * portfolio is the only colour on the page. (Was the template's lime #81ff2c.)
  */
 
 :root {
@@ -17,7 +18,8 @@
   --grey: #d9d9d9;
   --paper: #f3f3f3;
   --ink: #0a0a0a;
-  --accent: #81ff2c;
+  --accent: #ffffff;
+  --mid: #8a8d92;
   --line: rgba(243, 243, 243, 0.14);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
@@ -125,5 +127,5 @@
     padding: 6px 10px; line-height: 1;
     transition: background 0.3s, color 0.3s;
   }
-  .cta:hover { background: var(--fg); }
+  .cta:hover { background: var(--grey); }
 }

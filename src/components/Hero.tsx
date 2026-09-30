@@ -122,14 +122,14 @@ export function Hero() {
           <div className="absolute right-4 top-[62px] text-right md:right-6 md:top-[100px]">
             <p className="d2 text-[22px] md:text-[clamp(28px,3.4vw,52px)]">
               <Type className="block text-accent" text={hero.lines[0]} delay={0.9} />
-              <Type className="block" text={hero.lines[1]} delay={1.35} />
-              <Type className="block text-[0.72em]" text={hero.lines[2]} delay={1.8} />
+              <Type className="block text-[#8a8d92]" text={hero.lines[1]} delay={1.35} />
+              <Type className="block text-[0.72em] text-[#8a8d92]" text={hero.lines[2]} delay={1.8} />
             </p>
             <div className="mt-2 inline-flex items-stretch gap-3 text-left">
               <motion.span className="w-[5px] origin-top bg-accent" initial={{ scaleY: 0 }} animate={{ scaleY: 1 }} transition={{ duration: 0.8, ease: EASE, delay: 2.1 }} />
               <span>
                 <Type className="d2 block text-[15px] text-accent md:text-[22px]" text={hero.name} delay={2.2} />
-                <Type className="block text-[9px] font-semibold uppercase md:text-[11px]" text={hero.role} delay={2.5} />
+                <Type className="block text-[9px] font-semibold uppercase text-fg-2 md:text-[11px]" text={hero.role} delay={2.5} />
               </span>
             </div>
           </div>
@@ -151,7 +151,7 @@ export function Hero() {
                   animate={{ scaleY: 1 }}
                   transition={{ duration: 1.2, ease: EASE, delay: 1.3 + i * 0.12 }}
                 />
-                <span className="mono pl-0.5">
+                <span className="mono pl-0.5 text-fg-3">
                   {ph.a}/<span className="text-accent">{ph.b}</span>
                   <Ticks delay={1.8 + i * 0.3} />
                 </span>
