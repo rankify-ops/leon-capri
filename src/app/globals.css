@@ -1,0 +1,231 @@
+@import "tailwindcss";
+
+/*
+ * LÉONCAPRI — booking landing page
+ * ────────────────────────────────
+ * The register of a private residences release rather than an agency site:
+ * warm stone ground, near-black ink, hairline rules, a thin Didone display
+ * face that echoes the LÉONCAPRI wordmark, and tracked small caps for every
+ * label. No colour accents — the portfolio supplies the colour.
+ */
+
+:root {
+  --stone: #efe9e1;
+  --stone-2: #e6dfd4;
+  --bone: #f8f5f0;
+  --ink: #1c1917;
+  --ink-2: #4a433d;
+  --ink-3: #857b71;
+  --sand: #b49c82;
+  --rule: rgba(28, 25, 23, 0.14);
+  --rule-2: rgba(28, 25, 23, 0.28);
+
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+@theme inline {
+  --color-stone: var(--stone);
+  --color-stone-2: var(--stone-2);
+  --color-bone: var(--bone);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-sand: var(--sand);
+  --color-rule: var(--rule);
+  --font-sans: var(--font-host);
+  --default-transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer components {
+  html {
+    overflow-x: hidden;
+    background: var(--stone);
+    scroll-behavior: smooth;
+    scroll-padding-top: 80px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+  }
+
+  body {
+    background: var(--stone);
+    color: var(--ink-2);
+    font-family: var(--font-host), "Helvetica Neue", Arial, sans-serif;
+    font-weight: 300;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 { color: var(--ink); font-weight: 400; }
+
+  ::selection { background: var(--ink); color: var(--stone); }
+
+  .wrap { width: 100%; max-width: 1560px; margin-inline: auto; padding-inline: 20px; }
+  @media (min-width: 768px) { .wrap { padding-inline: 40px; } }
+  @media (min-width: 1280px) { .wrap { padding-inline: 64px; } }
+
+  /* Tracked small-caps label: nav, kickers, buttons, captions. */
+  .label {
+    font-family: var(--font-host), sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    line-height: 1.5;
+  }
+
+  /* Display: Host Grotesk light, tight — LÉONCAPRI's own face. */
+  .display {
+    font-family: var(--font-host), "Helvetica Neue", sans-serif;
+    font-weight: 300;
+    letter-spacing: -0.045em;
+    line-height: 0.96;
+    color: var(--ink);
+  }
+  /* Second half of a line in solid warm grey (no transparency). */
+  .serif-i { color: #9a9087; }
+
+  .h-hero { font-size: clamp(46px, 7.2vw, 128px); }
+  .h-xl { font-size: clamp(56px, 9vw, 168px); line-height: 0.9; }
+  .h2 { font-size: clamp(36px, 4.6vw, 78px); line-height: 1.0; }
+  .h3 { font-size: clamp(28px, 3vw, 46px); line-height: 1.08; }
+  .lead { font-size: clamp(17px, 1.35vw, 20px); line-height: 1.65; font-weight: 300; }
+
+  .rule { height: 1px; background: var(--rule); border: 0; }
+
+  /* ── Buttons ───────────────────────────────────────────── */
+  .btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    height: 54px;
+    padding-inline: 30px;
+    font-family: var(--font-host), sans-serif;
+    font-size: 11.5px;
+    font-weight: 500;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    flex-shrink: 0;
+    overflow: hidden;
+    isolation: isolate;
+    transition: color 0.6s var(--ease), border-color 0.6s var(--ease);
+  }
+  .btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    transform: scaleY(0);
+    transform-origin: bottom;
+    transition: transform 0.6s var(--ease);
+  }
+  .btn:hover::before, .btn:focus-visible::before { transform: scaleY(1); }
+  .btn .tick { width: 22px; height: 1px; background: currentColor; transition: width 0.6s var(--ease); }
+  .btn:hover .tick { width: 34px; }
+
+  .btn-ink { background: var(--ink); color: var(--stone); }
+  .btn-ink::before { background: #3a332d; }
+
+  .btn-line { border: 1px solid var(--rule-2); color: var(--ink); }
+  .btn-line::before { background: var(--ink); }
+  .btn-line:hover { color: var(--stone); border-color: var(--ink); }
+
+  .btn-light { background: var(--stone); color: var(--ink); }
+  .btn-light::before { background: #fff; }
+
+  .btn-sm { height: 42px; padding-inline: 20px; font-size: 10.5px; }
+
+  /* Underlined text link. */
+  .ulink {
+    background: linear-gradient(currentColor, currentColor) left bottom / 100% 1px no-repeat;
+    padding-bottom: 3px;
+    transition: background-size 0.6s var(--ease);
+  }
+  .ulink:hover { background-size: 0% 1px; background-position: right bottom; }
+
+  /* ── Reveal ────────────────────────────────────────────── */
+  .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1.2s var(--ease), transform 1.4s var(--ease); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* Image that settles from a slight zoom as it enters. */
+  .settle { overflow: hidden; }
+  .settle > img, .settle > video { transform: scale(1.08); transition: transform 2.2s var(--ease); }
+  .settle.in > img, .settle.in > video { transform: none; }
+
+  /* Curtain wipe for featured images. */
+  .curtain { clip-path: inset(0 0 100% 0); transition: clip-path 1.6s var(--ease-soft); }
+  .curtain.in { clip-path: inset(0 0 0 0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .settle > img, .settle > video, .curtain { opacity: 1; transform: none; clip-path: none; transition: none; }
+  }
+
+  /* ── Header ────────────────────────────────────────────── */
+  .hdr { transition: background-color 0.6s var(--ease), border-color 0.6s var(--ease), transform 0.6s var(--ease); border-bottom: 1px solid transparent; }
+  /* No backdrop blur: the Belmeré clip scrolls under it, and blur over a playing video freezes it in Chrome/Windows. */
+  .hdr { background: rgba(239, 233, 225, 0); }
+  .hdr.solid { background: rgba(239, 233, 225, 0.97); border-color: var(--rule); }
+
+  /* Hero headline lines rise in on load. */
+  .rise { display: block; overflow: hidden; }
+  .rise > span { display: block; transform: translateY(105%); animation: rise 1.6s var(--ease) forwards; }
+  @keyframes rise { to { transform: none; } }
+  .fade-in { opacity: 0; animation: fadein 1.6s var(--ease) forwards; }
+  @keyframes fadein { to { opacity: 1; } }
+
+  /* ── Hero stage: cut-out mockups on a shared floor ─────── */
+  .stage-item { position: absolute; bottom: 0; left: var(--lm); width: var(--wm); opacity: 0; transform: translateY(40px); animation: stage-in 1.8s var(--ease) forwards; }
+  @media (min-width: 768px) { .stage-item { left: var(--l); width: var(--w); } }
+  @keyframes stage-in { to { opacity: 1; transform: none; } }
+  .stage-item img { width: 100%; height: auto; display: block; filter: drop-shadow(0 30px 30px rgba(28, 25, 23, 0.18)) drop-shadow(0 6px 8px rgba(28, 25, 23, 0.12)); transition: transform 1.2s var(--ease); }
+  .stage-item::after { content: ""; position: absolute; left: 6%; right: 6%; bottom: -10px; height: 22px; border-radius: 50%; background: radial-gradient(closest-side, rgba(28, 25, 23, 0.22), transparent); z-index: -1; }
+  @media (prefers-reduced-motion: reduce) { .stage-item { opacity: 1; transform: none; animation: none; } }
+
+  /* Cut-out sitting in a bone panel. */
+  .cut-panel { display: flex; align-items: center; justify-content: center; background: var(--bone); }
+  .cut-panel img { max-width: 78%; max-height: 80%; width: auto; height: auto; object-fit: contain; filter: drop-shadow(0 24px 28px rgba(28, 25, 23, 0.2)) drop-shadow(0 4px 6px rgba(28, 25, 23, 0.12)); transition: transform 1.4s var(--ease); }
+  .cut-panel:hover img { transform: translateY(-6px) scale(1.02); }
+
+  /* Scroll cue line. */
+  .cue { position: relative; width: 1px; height: 56px; background: var(--rule-2); overflow: hidden; }
+  .cue::after { content: ""; position: absolute; left: 0; top: -40%; width: 1px; height: 40%; background: var(--ink); animation: cue 2.4s var(--ease-soft) infinite; }
+  @keyframes cue { to { top: 100%; } }
+
+  /* ── Statement: words ink in as you scroll ─────────────── */
+  .ink-word { color: rgba(28, 25, 23, 0.16); transition: color 0.5s linear; }
+  .ink-word.on { color: var(--ink); }
+
+  /* ── Archive marquee ───────────────────────────────────── */
+  .marquee { display: flex; width: max-content; animation: marquee 70s linear infinite; }
+  .marquee:hover { animation-play-state: paused; }
+  @keyframes marquee { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .marquee { animation: none; } }
+  .card-img { overflow: hidden; }
+  .card-img img { transition: transform 1.4s var(--ease), filter 1.4s var(--ease); }
+  .card:hover .card-img img { transform: scale(1.05); }
+
+  /* ── Disciplines accordion ─────────────────────────────── */
+  .acc-body { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.8s var(--ease); }
+  .acc-body > div { overflow: hidden; }
+  .acc.open .acc-body { grid-template-rows: 1fr; }
+  .acc-plus { position: relative; width: 18px; height: 18px; flex: none; }
+  .acc-plus::before, .acc-plus::after { content: ""; position: absolute; left: 0; top: 50%; width: 18px; height: 1px; background: var(--ink); transition: transform 0.6s var(--ease); }
+  .acc-plus::after { transform: rotate(90deg); }
+  .acc.open .acc-plus::after { transform: rotate(0deg); }
+
+  /* ── Portrait placeholder ──────────────────────────────── */
+  .placeholder {
+    background:
+      radial-gradient(120% 90% at 30% 20%, rgba(255, 255, 255, 0.55), transparent 60%),
+      linear-gradient(160deg, #e3dbcf, #d6ccbe);
+  }
+
+
+  /* Mobile book bar. */
+  .mbar { transform: translateY(110%); transition: transform 0.6s var(--ease); }
+  .mbar.show { transform: none; }
+}

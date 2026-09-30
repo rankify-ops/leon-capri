@@ -1,0 +1,18 @@
+*.tsbuildinfo
+.DS_Store
+.logo-drop
+.next
+.preview
+next-env.d.ts
+node_modules
+out
+scrape/*.html
+
+# scrape + session notes
+.firecrawl
+
+# raw capture of the live site
+_source
+
+# raw downloads from leoncapri.com (Squarespace CDN) — regenerate public/ via scripts/
+assets-raw/
