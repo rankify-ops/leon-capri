@@ -4,19 +4,19 @@ import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { asset } from "@/lib/basePath";
 import { hero } from "@/content/site";
-import { EASE, Type } from "./fx";
+import { EASE, Logo, Type } from "./fx";
 
-/** One giant word, sliding in from the right inside its own mask. */
-function Word({ children, delay, className }: { children: string; delay: number; className: string }) {
+/** One slice of the real LÉONCAPRI wordmark, sliding in from the right inside its own mask. */
+function Word({ part, delay, className }: { part: "leon" | "ca" | "pri"; delay: number; className: string }) {
   return (
-    <span className={`absolute block overflow-hidden pt-[0.14em] ${className}`}>
+    <span className={`absolute block overflow-hidden ${className}`}>
       <motion.span
-        className="d block text-accent"
+        className="block text-accent"
         initial={{ x: "70%", opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 1.3, ease: EASE, delay }}
       >
-        {children}
+        <Logo part={part} label="" className="w-full" />
       </motion.span>
     </span>
   );
@@ -108,16 +108,11 @@ export function Hero({ word = true }: { word?: boolean }) {
         <motion.div style={{ y: liftY, opacity: liftO }} className="absolute inset-0">
           {/* Giant stacked wordmark (v1 only; v2 keeps a hidden h1 for SEO). */}
           {word ? (
-          <h1 aria-label="LÉONCAPRI" className="text-[27vw] md:text-[20.5vw]">
-            <Word delay={0.35} className="left-[3vw] top-[27svh] md:top-[5vh]">
-              {hero.word[0]}
-            </Word>
-            <Word delay={0.5} className="left-[34vw] top-[45svh] md:left-[40vw] md:top-[37vh]">
-              {hero.word[1]}
-            </Word>
-            <Word delay={0.65} className="right-[4vw] top-[62svh] md:top-auto md:bottom-[-2vw] md:right-[8vw]">
-              {hero.word[2]}
-            </Word>
+          <h1 aria-label="LÉONCAPRI">
+            {/* Slice widths share one cap height: LÉON 2.62×, CA 1.35×, PRI 1.27× of it. */}
+            <Word part="leon" delay={0.35} className="left-[3vw] top-[27svh] w-[78.6vw] md:top-[12vh] md:w-[52.4vw]" />
+            <Word part="ca" delay={0.5} className="left-[30vw] top-[45svh] w-[40.5vw] md:left-[40vw] md:top-[45vh] md:w-[27vw]" />
+            <Word part="pri" delay={0.65} className="right-[6vw] top-[61svh] w-[38vw] md:top-auto md:bottom-[3vh] md:right-[6vw] md:w-[25.4vw]" />
           </h1>
           ) : (
             <h1 className="sr-only">LÉONCAPRI</h1>
@@ -138,6 +133,11 @@ export function Hero({ word = true }: { word?: boolean }) {
               </span>
             </div>
           </div>
+
+          {/* What the footage is: his work, not stock. */}
+          <p className="mono absolute bottom-4 right-4 hidden text-fg-2 md:block">
+            <span className="text-fg">Belmeré, Wollongong</span> — campaign by LÉONCAPRI
+          </p>
 
           {/* Four phase columns. */}
           <div className="px absolute inset-x-0 top-[39%] hidden h-[28%] grid-cols-4 md:grid">

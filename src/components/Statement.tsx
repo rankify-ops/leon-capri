@@ -2,8 +2,8 @@
 
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
-import { scatter, statement } from "@/content/site";
-import { Img, Rise } from "./fx";
+import { scatter, scatterHead, statement } from "@/content/site";
+import { Img, Rise, WorkTag } from "./fx";
 
 /** Photo + manifesto block that grows from small to full size as it rises into view. */
 export function Statement() {
@@ -18,8 +18,9 @@ export function Statement() {
     <section id="about" className="relative z-10 -mt-[20vh] bg-bg pb-10 pt-[18vh]">
       <motion.div ref={ref} style={{ scale, y }} className="px mx-auto max-w-[1180px] origin-top">
         <div className="grid grid-cols-[38%_1fr] gap-3 md:grid-cols-[250px_1fr]">
-          <div className="aspect-[3/4] overflow-hidden bg-bg-2">
+          <div className="relative aspect-[3/4] overflow-hidden bg-bg-2">
             <Img slug="insight" alt="Insight — brand by LÉONCAPRI" className="bw h-full w-full object-cover" sizes="300px" />
+            <WorkTag className="absolute bottom-2 left-2">Insight — LÉONCAPRI</WorkTag>
           </div>
           <p className="d2 text-[clamp(20px,3.3vw,46px)] leading-[1] text-fg-2">{words.slice(0, SPLIT).join(" ")}</p>
         </div>
@@ -78,10 +79,19 @@ function Floater({ s, i }: { s: (typeof scatter)[number]; i: number }) {
 /** Portfolio pieces scattered across the dark, each drifting at its own speed. */
 export function Scatter() {
   return (
-    <section id="work" className="relative h-[200vh] overflow-hidden bg-bg md:h-[220vh]">
-      {scatter.map((s, i) => (
-        <Floater key={s.slug} s={s} i={i} />
-      ))}
+    <section id="work" className="relative z-10 bg-bg">
+      <div className="px flex flex-wrap items-end justify-between gap-4 border-t border-white/15 pt-6">
+        <div>
+          <p className="mono text-fg-3">{scatterHead.k}</p>
+          <h2 className="d2 mt-2 text-[clamp(30px,3.6vw,56px)]">{scatterHead.t}</h2>
+        </div>
+        <p className="mono max-w-[340px] text-fg-2">{scatterHead.sub}</p>
+      </div>
+      <div className="relative h-[200vh] overflow-hidden md:h-[220vh]">
+        {scatter.map((s, i) => (
+          <Floater key={s.slug} s={s} i={i} />
+        ))}
+      </div>
     </section>
   );
 }

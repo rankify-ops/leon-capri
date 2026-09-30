@@ -90,10 +90,11 @@
   .glitch { position: relative; display: inline-block; }
   .glitch:hover { animation: glitch 0.45s steps(2) 2; }
   @keyframes glitch {
-    0% { text-shadow: 2px 0 #ff2d55, -2px 0 #3d5bff; transform: translate(0); }
-    25% { text-shadow: -3px 0 #ff2d55, 3px 0 #3d5bff; transform: translate(1px, -1px); }
-    50% { text-shadow: 3px 1px #ff2d55, -3px -1px #3d5bff; transform: translate(-1px, 1px); }
-    100% { text-shadow: none; transform: none; }
+    /* filter, not text-shadow: the logo is an SVG mask, not text. */
+    0% { filter: drop-shadow(2px 0 #ff2d55) drop-shadow(-2px 0 #3d5bff); transform: translate(0); }
+    25% { filter: drop-shadow(-3px 0 #ff2d55) drop-shadow(3px 0 #3d5bff); transform: translate(1px, -1px); }
+    50% { filter: drop-shadow(3px 1px #ff2d55) drop-shadow(-3px -1px #3d5bff); transform: translate(-1px, 1px); }
+    100% { filter: none; transform: none; }
   }
 
   /* Blinking caret for typed lines. */

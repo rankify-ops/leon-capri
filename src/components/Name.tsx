@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { name, settle } from "@/content/site";
-import { BlurWords, EASE, Img, Rise } from "./fx";
+import { BlurWords, EASE, Img, Rise, WorkTag } from "./fx";
 
 /** Pinned photo on the left; grey panel and a second photo scroll past on the right. */
 export function NameGrid() {
@@ -15,6 +15,7 @@ export function NameGrid() {
     <section ref={ref} className="relative z-10 bg-bg md:grid md:grid-cols-[52%_48%]">
       <div className="relative h-[100svh] md:sticky md:top-0">
         <Img slug="luna-sand" alt="Luna — Huskisson" className="bw h-full w-full object-cover" sizes="52vw" />
+        <WorkTag className="absolute right-4 top-20 md:right-6">Luna, Huskisson — LÉONCAPRI</WorkTag>
         <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(5,6,9,0.55),rgba(5,6,9,0)_55%)]" />
         <div className="px absolute bottom-8 left-0 md:bottom-12">
           <p className="flex items-center gap-3 text-[10px] font-semibold uppercase">
@@ -52,6 +53,7 @@ export function NameGrid() {
         </motion.div>
         <div className="relative h-[100svh] overflow-hidden">
           <Img slug="air" alt="Air — brand by LÉONCAPRI" className="bw h-full w-full object-cover" sizes="48vw" />
+          <WorkTag className="absolute left-4 top-6 z-10 md:left-6">Air — LÉONCAPRI</WorkTag>
           <div className="absolute inset-0 bg-black/35" />
           <p className="d2 absolute bottom-10 right-4 max-w-[560px] text-right text-[clamp(22px,2.4vw,36px)] md:right-6">
             <BlurWords text={name.overlay} />

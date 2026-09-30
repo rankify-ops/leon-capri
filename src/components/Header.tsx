@@ -1,9 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { asset } from "@/lib/basePath";
 import { nav } from "@/content/site";
-import { Book, EASE } from "./fx";
+import { Book, EASE, Logo } from "./fx";
 
 function Roll({ children }: { children: string }) {
   return (
@@ -24,8 +23,7 @@ export function Header() {
       className="px pointer-events-none fixed inset-x-0 top-0 z-50 flex items-center justify-between py-4 mix-blend-difference md:py-5"
     >
       <a href="#top" className="glitch pointer-events-auto" aria-label="LÉONCAPRI — top">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={asset("/img/wordmark-light.png")} alt="LÉONCAPRI" className="h-[18px] w-auto md:h-[24px]" />
+        <Logo className="w-[96px] text-white md:w-[126px]" />
       </a>
       <nav className="pointer-events-auto flex items-center gap-3 text-[13px] font-semibold uppercase tracking-[-0.02em] text-white md:gap-4 md:text-[15px]">
         {nav.map((n) => (

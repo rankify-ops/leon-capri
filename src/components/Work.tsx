@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { belmere, luna, services } from "@/content/site";
-import { BlurWords, Cut, EASE, Img, Rise, ScrollText } from "./fx";
+import { BlurWords, Cut, EASE, Img, Logo, Rise, ScrollText, WorkTag } from "./fx";
 
 /** Accent panel + B&W photo; the [tag] focuses in and a line sweeps across. */
 export function Luna() {
@@ -67,6 +67,7 @@ export function Luna() {
 
       <div className="relative h-[80svh] overflow-hidden md:h-auto">
         <Img slug="luna" alt="Luna — Huskisson brand identity" className="bw h-full w-full object-cover object-[88%_50%]" sizes="50vw" />
+        <WorkTag className="absolute left-4 top-20 md:left-6 md:top-24">{luna.imgTag}</WorkTag>
         <motion.div style={{ width: line }} className="absolute right-0 top-[74%] h-[3px] bg-accent" />
         <motion.p
           style={{ filter: blur, opacity: tagO, scale: tagS }}
@@ -87,8 +88,8 @@ export function Services() {
 
   return (
     <section id="services" ref={ref} className="px relative z-10 bg-bg pb-24 pt-20 md:pt-28">
-      <motion.h2 style={{ x }} className="d whitespace-nowrap text-[17.2vw] leading-[0.82] text-accent">
-        {services.big}
+      <motion.h2 style={{ x }} className="text-accent">
+        <Logo label={services.big} className="w-full" />
       </motion.h2>
       <ScrollText
         className="d2 mt-4 text-[clamp(28px,4.2vw,68px)]"
@@ -165,6 +166,7 @@ export function Belmere() {
       </div>
 
       <div className="px pb-24 pt-10 md:min-h-[210vh] md:pt-24">
+        <WorkTag tone="dark" className="mb-5">{belmere.tag}</WorkTag>
         <p className="d2 text-[clamp(26px,2.4vw,38px)]">{belmere.small}</p>
         <h2 className="d text-[clamp(60px,7vw,116px)]">
           <Rise>{belmere.big}</Rise>

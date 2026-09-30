@@ -3,7 +3,7 @@
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { coast, quote, site, sprezz } from "@/content/site";
-import { Book, BlurWords, EASE, Img, Rise, ScrollText } from "./fx";
+import { Book, BlurWords, EASE, Img, Logo, Rise, ScrollText, WorkTag } from "./fx";
 
 /** Off-white interlude: two columns of the name story around a central word, then the giant wordmark. */
 export function Sprezz() {
@@ -30,8 +30,8 @@ export function Sprezz() {
       </div>
 
       <div ref={ref} className="px pb-12 pt-10">
-        <motion.h2 style={{ y: wordY }} className="d text-center text-[16.5vw] leading-[0.8]">
-          LÉONCAPRI
+        <motion.h2 style={{ y: wordY }} className="mx-auto max-w-[1500px]">
+          <Logo className="w-full" />
         </motion.h2>
         <div className="mx-auto mt-4 flex max-w-[1140px] items-end gap-3">
           <span className="text-[22px] font-bold leading-none tracking-[-0.08em]">LC</span>
@@ -112,6 +112,7 @@ export function Coast() {
             <Img slug="coast-ext" alt="Coast — North Wollongong" className="bw h-full w-full object-cover object-[33%_50%]" sizes="50vw" />
           </div>
           <div className="px flex flex-col pb-8 pt-10 md:pt-24">
+            <WorkTag tone="dark" className="mb-5 self-start">{coast.tag}</WorkTag>
             <h2 className="d text-[clamp(52px,5.6vw,92px)]">
               <Rise>{coast.title}</Rise>
             </h2>

@@ -224,3 +224,52 @@ export function CalLoader() {
   }, []);
   return null;
 }
+
+/* ── LÉONCAPRI wordmark ────────────────────────────────────────────────
+ * Traced from their LC.png into public/img/wordmark.svg (viewBox 4272×816)
+ * and drawn as a CSS mask, so it takes the current text colour. `part`
+ * crops to one slice of the mark (the v1 hero stacks LÉON / CA / PRI). */
+const LOGO_W = 4272;
+const LOGO_H = 816;
+// Cut points measured on the trace: N stem meets C at 2136, A ends 3230 / P starts 3238.
+const PARTS = { all: [0, LOGO_W], leon: [0, 2136], ca: [2136, 3234], pri: [3234, LOGO_W] } as const;
+
+export function Logo({ part = "all", className = "", label = "LÉONCAPRI" }: { part?: keyof typeof PARTS; className?: string; label?: string }) {
+  const [x0, x1] = PARTS[part];
+  const w = x1 - x0;
+  const url = `url(${asset("/img/wordmark.svg")})`;
+  const size = `${(LOGO_W / w) * 100}% 100%`;
+  const pos = w === LOGO_W ? "0 0" : `${(x0 / (LOGO_W - w)) * 100}% 0`;
+  return (
+    <span
+      role="img"
+      aria-label={label}
+      className={`block bg-current ${className}`}
+      style={{
+        aspectRatio: `${w} / ${LOGO_H}`,
+        WebkitMaskImage: url,
+        maskImage: url,
+        WebkitMaskSize: size,
+        maskSize: size,
+        WebkitMaskPosition: pos,
+        maskPosition: pos,
+        WebkitMaskRepeat: "no-repeat",
+        maskRepeat: "no-repeat",
+      }}
+    />
+  );
+}
+
+/** Marks an image or section as LÉONCAPRI client work. */
+export function WorkTag({ children, className = "", tone = "light" }: { children: React.ReactNode; className?: string; tone?: "light" | "dark" }) {
+  return (
+    <span
+      className={`mono inline-flex items-center gap-2 px-1.5 py-0.5 text-[9.5px] md:text-[10px] ${
+        tone === "light" ? "bg-white text-ink" : "bg-ink text-white"
+      } ${className}`}
+    >
+      <span className="h-1.5 w-1.5 rounded-full bg-current" aria-hidden />
+      {children}
+    </span>
+  );
+}

@@ -49,6 +49,12 @@ export const statement = {
   small: ["Strategy with emotion.", "Stories that sell.", "Shaping brands, stories and strategies across the property industry and beyond."],
 };
 
+export const scatterHead = {
+  k: "Selected work — (08)",
+  t: "Brands by LÉONCAPRI",
+  sub: "Every piece on this page is LÉONCAPRI client work — naming, identity, print, digital and campaign.",
+};
+
 // Scattered gallery — real LÉONCAPRI brands.
 export const scatter = [
   { slug: "luna", cap: "Luna — Huskisson", x: 64, w: 30, speed: 0.35, top: 2 },
@@ -86,8 +92,9 @@ export const settle = {
 
 export const luna = {
   title: ["Luna", "Huskisson"],
-  study: "Study — 01",
-  sel: "Selected work",
+  study: "Case study 01 / 03",
+  sel: "Brand direction & campaign by LÉONCAPRI",
+  imgTag: "Luna — LÉONCAPRI",
   bar: ["Pure luxury.", "Beachside living."],
   body: "Luna is Huskisson’s benchmark of pure luxury and beachside living. A premium collection of just 15 curated residences designed in honour of Huskisson’s unique clean and pristine surroundings.",
   tag: "[Huskisson]",
@@ -110,6 +117,7 @@ export const services = {
 
 export const belmere = {
   side: ["Wollongong", "17 Levels", "80+ Residences", "CBD"],
+  tag: "Case study 02 / 03 — Complete design & marketing campaign by LÉONCAPRI",
   small: "Wollongong’s newest",
   big: "Belmeré",
   body: "BELMERÉ — Wollongong’s newest landmark in modern city living. Rising 17 levels above the vibrant CBD.",
@@ -146,6 +154,7 @@ export const quote = {
 
 export const coast = {
   title: "Coast",
+  tag: "Case study 03 / 03 — Brand identity & custom typeface by LÉONCAPRI",
   body: "Inspired by the dramatic Amalfi Coast-like escarpment where the steep mountains meet the sea, Coast is a series of 12 exceptional PRD designed residences.",
   small: ["North Wollongong", "12 Residences"],
   link: "coastwollongong.com.au",

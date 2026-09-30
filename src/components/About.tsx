@@ -1,9 +1,8 @@
 "use client";
 
 import { motion } from "motion/react";
-import { asset } from "@/lib/basePath";
 import { about, footer, nav, site } from "@/content/site";
-import { Book, EASE, Rise, ScrollText } from "./fx";
+import { Book, EASE, Logo, Rise, ScrollText } from "./fx";
 
 /** Portrait placeholder with the template's horizontal slice glitch. */
 function Portrait() {
@@ -163,22 +162,21 @@ export function Footer() {
             </li>
           </ul>
         </div>
-        <motion.p
-          className="d overflow-hidden whitespace-nowrap pt-4 text-[16.4vw] leading-[0.8]"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+        <motion.div
+          className="pt-6"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1 }}
+          transition={{ duration: 1.2, ease: EASE }}
         >
-          {footer.word}
-        </motion.p>
+          <Logo label={footer.word} className="w-full" />
+        </motion.div>
         <div className="mt-4 flex items-center justify-between border-t border-ink/60 py-3 text-[10px] font-semibold">
           <span>© {new Date().getFullYear()} LÉONCAPRI. All work, all rights.</span>
           <a href="#top" aria-label="Back to top" className="text-[14px]">
             ↑
           </a>
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={asset("/img/wordmark.png")} alt="" className="h-3 w-auto" />
+          <Logo label="" className="w-[64px]" />
         </div>
       </div>
     </footer>
