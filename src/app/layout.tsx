@@ -1,13 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Host_Grotesk } from "next/font/google";
+import { Inter, Fragment_Mono } from "next/font/google";
 import { site } from "@/content/site";
 import { asset } from "@/lib/basePath";
 import "./globals.css";
 
-// LÉONCAPRI's own site face.
-const host = Host_Grotesk({ subsets: ["latin"], weight: ["300", "400", "500"], variable: "--font-host", display: "swap" });
+const inter = Inter({ subsets: ["latin"], weight: ["400", "500", "600", "700"], variable: "--font-inter", display: "swap" });
+const mono = Fragment_Mono({ subsets: ["latin"], weight: "400", variable: "--font-mono", display: "swap" });
 
-const title = "LÉONCAPRI — Book an Initial Discussion with Izaac Trpeski";
+const title = "LÉONCAPRI — Book a Call with Izaac Trpeski";
 // Their own og:description.
 const description =
   "Leon Capri are design experience visionaries focused on Project Marketing, Branding & Design seeking to transform spaces. We work with Property Developers, Real Estate Agencies, Architects and other consultants.";
@@ -30,11 +30,11 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = { themeColor: "#efe9e1" };
+export const viewport: Viewport = { themeColor: "#050609" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en-AU" className={host.variable}>
+    <html lang="en-AU" className={`${inter.variable} ${mono.variable}`}>
       <body>{children}</body>
     </html>
   );

@@ -1,14 +1,13 @@
 import { Header } from "@/components/Header";
 import { Hero } from "@/components/Hero";
-import { Statement } from "@/components/Statement";
-import { Work } from "@/components/Work";
-import { Archive } from "@/components/Archive";
-import { Founder } from "@/components/Founder";
-import { Disciplines } from "@/components/Disciplines";
-import { Booking, CalLoader } from "@/components/Booking";
-import { Footer, NameSection } from "@/components/Footer";
-import { MobileBar } from "@/components/MobileBar";
+import { Scatter, Statement } from "@/components/Statement";
+import { NameGrid, Settle } from "@/components/Name";
+import { Belmere, Luna, Services } from "@/components/Work";
+import { Coast, Quote, Sprezz } from "@/components/Story";
+import { About, Footer } from "@/components/About";
+import { CalLoader } from "@/components/fx";
 
+// Section order follows vertical.framer.media one-to-one.
 export default function Home() {
   return (
     <>
@@ -16,15 +15,19 @@ export default function Home() {
       <main>
         <Hero />
         <Statement />
-        <Work />
-        <Archive />
-        <Founder />
-        <Disciplines />
-        <NameSection />
-        <Booking />
+        <Scatter />
+        <NameGrid />
+        <Settle />
+        <Luna />
+        <Services />
+        <Belmere />
+        <Sprezz />
+        <Quote />
+        <Coast />
+        <About />
       </main>
       <Footer />
-      <MobileBar />
+      <div className="grain" aria-hidden />
       <CalLoader />
     </>
   );

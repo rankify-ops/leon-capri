@@ -16,3 +16,4 @@ _source
 
 # raw downloads from leoncapri.com (Squarespace CDN) — regenerate public/ via scripts/
 assets-raw/
+preview-hero.jpg

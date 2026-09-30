@@ -1,49 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { motion } from "motion/react";
 import { asset } from "@/lib/basePath";
-import { booking } from "@/content/site";
-import { BookButton } from "./ui";
+import { nav } from "@/content/site";
+import { Book, EASE } from "./fx";
 
-const NAV = [
-  { href: "#work", label: "Work" },
-  { href: "#founder", label: "Founder" },
-  { href: "#disciplines", label: "Disciplines" },
-];
-
-export function Header() {
-  const [solid, setSolid] = useState(false);
-  useEffect(() => {
-    const on = () => setSolid(window.scrollY > 24);
-    on();
-    window.addEventListener("scroll", on, { passive: true });
-    return () => window.removeEventListener("scroll", on);
-  }, []);
-
+function Roll({ children }: { children: string }) {
   return (
-    <header className={`hdr fixed inset-x-0 top-0 z-50 ${solid ? "solid" : ""}`}>
-      <div className={`overflow-hidden bg-ink text-center text-stone transition-[height] duration-700 ${solid ? "h-0" : "h-8"}`}>
-        <p className="label flex h-8 items-center justify-center px-4 text-[9.5px] tracking-[0.3em] sm:text-[10px]">
-          <span className="truncate sm:hidden">{booking.bar.split(" · ")[1]}</span>
-          <span className="hidden truncate sm:inline">{booking.bar}</span>
-        </p>
-      </div>
-      <div className="wrap grid h-[68px] grid-cols-[1fr_auto] items-center gap-4 md:h-[76px] md:grid-cols-[1fr_auto_1fr]">
-        <nav className="hidden items-center gap-9 md:flex" aria-label="Sections">
-          {NAV.map((n) => (
-            <a key={n.href} href={n.href} className="label text-ink transition-opacity hover:opacity-50">
-              {n.label}
-            </a>
-          ))}
-        </nav>
-        <a href="#top" aria-label="LÉONCAPRI — top" className="justify-self-start md:justify-self-center">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={asset("/img/wordmark.png")} alt="LÉONCAPRI" className="h-[17px] w-auto md:h-[21px]" />
-        </a>
-        <div className="justify-self-end">
-          <BookButton size="sm">Book a Call</BookButton>
-        </div>
-      </div>
-    </header>
+    <span className="roll">
+      <span>{children}</span>
+      <span aria-hidden>{children}</span>
+    </span>
+  );
+}
+
+/** Fixed bar in difference blend: white over dark, black over the light panels. */
+export function Header() {
+  return (
+    <motion.header
+      initial={{ opacity: 0, y: -12 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.9, ease: EASE, delay: 0.9 }}
+      className="px pointer-events-none fixed inset-x-0 top-0 z-50 flex items-center justify-between py-4 mix-blend-difference md:py-5"
+    >
+      <a href="#top" className="glitch pointer-events-auto" aria-label="LÉONCAPRI — top">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src={asset("/img/wordmark-light.png")} alt="LÉONCAPRI" className="h-[18px] w-auto md:h-[24px]" />
+      </a>
+      <nav className="pointer-events-auto flex items-center gap-3 text-[13px] font-semibold uppercase tracking-[-0.02em] text-white md:gap-4 md:text-[15px]">
+        {nav.map((n) => (
+          <a key={n.href} href={n.href} className="hidden sm:inline-flex">
+            <Roll>{n.label}</Roll>
+          </a>
+        ))}
+        <Book className="inline-flex">
+          <Roll>Book a Call</Roll>
+        </Book>
+      </nav>
+    </motion.header>
   );
 }

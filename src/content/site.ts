@@ -1,7 +1,7 @@
 /*
- * Copy is verbatim from leoncapri.com (home, about, services, contact,
- * work-highlights) unless marked NEW — those lines were written for this
- * booking page and need Izaac's sign-off.
+ * Structure mirrors vertical.framer.media section for section. Copy is
+ * verbatim from leoncapri.com (home, about, services, contact,
+ * work-highlights) unless marked NEW — those need Izaac's sign-off.
  */
 
 export const site = {
@@ -19,117 +19,162 @@ export const site = {
   reach: "Consulting nationally and internationally.",
 };
 
+export const nav = [
+  { href: "#work", label: "Work" },
+  { href: "#about", label: "About" },
+  { href: "#services", label: "Services" },
+];
+
 export const hero = {
-  line1: "Shape the story.",
-  line2: "Sell the vision.",
-  kicker: "Enduring. Artisanal. Magnetic.",
-  // NEW — hero sub-line (the studio line itself runs in full just below).
-  sub: "Branding, design & marketing for the property world — by appointment with founder Izaac Trpeski.",
-  intro:
-    "A visionary design studio cultivating in the disciplines of branding, design & marketing for the property world and beyond. Building iconic brands, experiences, and high-performing results.",
-};
-
-// NEW — top bar + booking language (Tom's brief: booked out, elevated, not cocky).
-export const booking = {
-  bar: "Now scheduling initial discussions · Limited engagements each season",
-  kicker: "By appointment",
-  title: ["A considered conversation,", "held in advance."],
-  body: [
-    "Izaac works closely on every engagement, so the studio accepts only a select number of projects at a time — and the calendar is often committed well ahead.",
-    "If a development is on your horizon, an early conversation is the most graceful place to begin.",
+  word: ["LÉON", "CA", "PRI"],
+  lines: ["Shape the story.", "Sell the vision.", "Stories that sell."],
+  name: "Izaac Trpeski",
+  role: "Founder/Creative Director",
+  phases: [
+    { n: "001", a: "Brand", b: "Identity" },
+    { n: "002", a: "Print", b: "Design" },
+    { n: "003", a: "Digital", b: "Production" },
+    { n: "004", a: "Experiential", b: "Design" },
   ],
-  cta: "Reserve an initial discussion",
+  idx: "IDX/LC",
+  year: "2022",
+  // "We work with…" (their og:description)
+  list: ["Property Developers", "Real Estate Agencies", "Architects", "Financiers & Planners", "And Other Consultants"],
 };
 
-export const facts = [
-  { k: "Established", v: "2022" },
-  { k: "Experience", v: "Over two decades" },
-  { k: "Practice", v: "Multi-disciplinary" },
-  { k: "Reach", v: "National & International" },
-];
-
-export const featured = [
-  {
-    slug: "luna",
-    name: "Luna",
-    place: "Huskisson",
-    url: "https://lunahuskisson.com.au/",
-    host: "lunahuskisson.com.au",
-    body: "Luna is Huskisson’s benchmark of pure luxury and beachside living. A premium collection of just 15 curated residences designed in honour of Huskisson’s unique clean and pristine surroundings. A design focus on aesthetic opulence, the brand direction highlights all the beauty inside and out.",
-    main: "luna",
-    side: ["luna-tote", "luna-phone"],
-  },
-  {
-    slug: "belmere",
-    name: "Belmeré",
-    place: "Wollongong",
-    url: "https://belmerewollongong.com.au/",
-    host: "belmerewollongong.com.au",
-    body: "BELMERÉ — Wollongong’s newest landmark in modern city living. Rising 17 levels above the vibrant CBD, BELMERÉ offers over 80 impressive architecturally crafted residences designed for those who seek the perfect balance of urban convenience, coastal lifestyle, and contemporary sophistication. LÉONCAPRI crafted a complete design and marketing campaign for the Belmeré development.",
-    main: "video",
-    side: ["belmere-brochure"],
-  },
-  {
-    slug: "coast",
-    name: "Coast",
-    place: "North Wollongong",
-    url: "https://coastwollongong.com.au/",
-    host: "coastwollongong.com.au",
-    body: "Inspired by the dramatic Amalfi Coast-like escarpment where the steep mountains meet the sea, Coast is a series of 12 exceptional PRD designed residences with lush gardens by DSB Landscape Architects. The custom hand-crafted ‘COAST’ font draws light to the curves on each level. The circular logo device incorporates topography patterns and pays homage to the local Dharawal nation.",
-    main: "coast",
-    side: ["coast-phone", "coast-laptop"],
-  },
-] as const;
-
-export const archive = [
-  { slug: "air", name: "Air" },
-  { slug: "otto", name: "Otto" },
-  { slug: "silk", name: "Silk" },
-  { slug: "knightsbridge", name: "Knightsbridge" },
-  { slug: "mara", name: "Mára" },
-  { slug: "paloma", name: "Paloma" },
-  { slug: "raya", name: "Raya" },
-  { slug: "noir", name: "Noir" },
-  { slug: "oasis", name: "Oasis" },
-  { slug: "natura", name: "Natura" },
-  { slug: "svt", name: "South Village Thirroul" },
-  { slug: "mind", name: "MIND" },
-];
-
-export const archiveLine =
-  "Brands thrive when vision and collaboration align. We partner with the right people and companies to craft enduring relationships and build award-winning brands.";
-
-export const founder = {
-  bio: "Guided by over two decades of design and property development experience, Director Izaac brings a rare synergy between creative direction and development acumen. Every project is approached with authenticity and intent, crafted to inspire connection, drive value, and leave a lasting impression.",
-  studio:
-    "Established in 2022, LEONCAPRI is a multi-disciplinary design practice specialising in Design, Branding, Marketing, and Experience Design, shaping brands, stories and strategies across the property industry and beyond.",
-  motto: ["Design with purpose.", "Strategy with emotion.", "Stories that sell."],
+export const statement = {
+  big: "Enduring. Artisanal. Magnetic. A visionary design studio cultivating in the disciplines of branding, design & marketing for the property world and beyond.",
+  big2: "Building iconic brands, experiences, and high-performing results.",
+  accent: "Design with purpose.",
+  small: ["Strategy with emotion.", "Stories that sell.", "Shaping brands, stories and strategies across the property industry and beyond."],
 };
 
-export const disciplines = [
-  {
-    name: "Brand Identity",
-    items: ["Place Naming", "Strategic Brand Positioning", "Brand Style Guides", "Art & Creative Direction", "Illustration", "Copywriting", "Artist Collaboration", "IP Name Registration"],
-  },
-  {
-    name: "Print Design",
-    items: ["Brochures", "Floor Plans", "Floor Plates", "Agent Flip Books", "Finishes Boards", "Marketing Flyers", "Stationery", "Invitations", "Information Memorandums", "Books", "Packaging", "Collateral Systems", "Editorial", "Press Ads", "Print Setup"],
-  },
-  {
-    name: "Digital Design & Production",
-    items: ["Web Design & Development", "UX/UI Design", "Social Media Campaigns", "Lead Generation", "Content Creation", "EDM (Electronic Direct Mail to databases)", "Web Banners", "E-Books", "PDF Brochures", "Digital Floor Plans", "Digital Floor Plates", "CGI Renders", "Aerial & Drone Photography", "Architectural Photography", "Lifestyle Photography", "Corporate Headshots", "Video Production Collaboration", "Campaign Video Creative Direction", "CGI Renditions", "CGI Animations", "AI Applications & Implementation"],
-  },
-  {
-    name: "Environmental & Experiential",
-    items: ["Signage", "Hoarding", "Wayfinding", "Wallpaper + Murals", "Apparel + Merchandise", "Property Display Suites", "Aframes, Billboards, Sales Display Flags", "Experiential", "and more..."],
-  },
+// Scattered gallery — real LÉONCAPRI brands.
+export const scatter = [
+  { slug: "luna", cap: "Luna — Huskisson", x: 70, w: 21, speed: 0.35, top: 2 },
+  { slug: "noir", cap: "Noir", x: 18, w: 22, speed: 0.15, top: 6 },
+  { slug: "otto", cap: "Otto", x: 1, w: 15, speed: 0.55, top: 24 },
+  { slug: "coast-ext", cap: "Coast — North Wollongong", x: 44, w: 19, speed: 0.25, top: 30 },
+  { slug: "silk", cap: "Silk", x: 78, w: 17, speed: 0.45, top: 44 },
+  { slug: "mara", cap: "Mára", x: 22, w: 20, speed: 0.3, top: 56 },
+  { slug: "raya", cap: "Raya", x: 1, w: 21, speed: 0.6, top: 76 },
+  { slug: "knightsbridge", cap: "Knightsbridge", x: 58, w: 22, speed: 0.2, top: 72 },
 ];
-
-export const audience =
-  "We work with Property Developers, Real Estate Agencies, Architects and other consultants.";
 
 export const name = {
-  leon: "LÉON: the mind — artistic, powerful, visionary.",
-  capri: "CAPRI: the soul — sophisticated, elegant, evocative.",
-  close: "The fusion of power and poise, LÉONCAPRI© is a marriage of strength and style, and intellect and instinct.",
+  tag: "Name",
+  rev: "Léon — Capri",
+  big: ["The fusion", "of power", "and poise"],
+  title: ["Strength", "and style"],
+  cat1: { k: "LÉON — 1.0", v: "LÉON: the mind — artistic, powerful, visionary. Bold creativity, timeless intellect, and innovation grounded in craft." },
+  cat2: { k: "CAPRI — 2.0", v: "CAPRI: the soul — sophisticated, elegant, evocative. Design that is not just functional but experiential and emotive." },
+  overlay: "A modern creative atelier that balances discipline with imagination, and strategy with beauty.",
+};
+
+export const settle = {
+  tag: "We collaborate with",
+  h: ["Brands thrive when", "vision aligns."],
+  sub: ["We partner with the right people and companies", "to craft enduring relationships."],
+  src: "Source — LÉONCAPRI",
+  modules: [
+    { k: "Module — A.1", t: "Development, Finance & Legal", v: "Property Developers, Private Lenders / Financiers, Brokers, Valuers, Property Accountants, Property Lawyers, Conveyancers, Insurance, Strata Management." },
+    { k: "Module — A.2", t: "Strategy, Planning & Approvals", v: "Town Planners, Project Managers, Quantity Surveyors, Surveyors, Engineers, Heritage and Sustainability Consultants." },
+    { k: "Module — A.3", t: "Design & Engineering", v: "Architects, Interior Designers / Interior Architects, Landscape Architects, Facade, Services and Fire Engineers, Acousticians." },
+    { k: "Module — A.4", t: "Construction & Delivery", v: "Builders, All Building Trade Companies, Trade & Material Suppliers, Certifiers / Building Surveyors, OHS Consultants." },
+  ],
+};
+
+export const luna = {
+  title: ["Luna", "Huskisson"],
+  study: "Study — 01",
+  sel: "Selected work",
+  bar: ["Pure luxury.", "Beachside living."],
+  body: "Luna is Huskisson’s benchmark of pure luxury and beachside living. A premium collection of just 15 curated residences designed in honour of Huskisson’s unique clean and pristine surroundings.",
+  tag: "[Huskisson]",
+  url: "https://lunahuskisson.com.au/",
+  thumbs: ["cut-luna-tote", "cut-luna-phone", "cut-luna-book"],
+};
+
+export const services = {
+  big: "LÉONCAPRI",
+  sub: ["Shaping brands, stories", "and strategies for property."],
+  bar: ["Studio — est. 2022", "Services"],
+  rows: [
+    { k: "Mod — I/LC", t: "Brand Identity", parts: [["Place naming", true], [", strategic brand positioning, brand style guides, ", false], ["art & creative direction", true], [", illustration, copywriting, artist collaboration and IP name registration.", false]] },
+    { k: "Mod — II/LC", t: "Print Design", parts: [["Brochures, floor plans", true], [", floor plates, ", false], ["agent flip books", true], [", finishes boards, invitations, information memorandums, books, packaging and editorial.", false]] },
+    { k: "Mod — III/LC", t: "Digital Design & Production", parts: [["Web design & development", true], [", UX/UI, social media campaigns, lead generation, EDM, ", false], ["CGI renders and animations", true], [", aerial, architectural and lifestyle photography.", false]] },
+    { k: "Mod — IV/LC", t: "Environmental & Experiential", parts: [["Signage, hoarding", true], [" and wayfinding, wallpaper and murals, apparel and merchandise, ", false], ["property display suites", true], [", billboards and sales display flags.", false]] },
+    { k: "Mod — V/LC", t: "AI Applications", parts: [["AI applications & implementation", true], [", campaign video creative direction, video production collaboration and ", false], ["corporate headshots", true], [".", false]] },
+  ] as { k: string; t: string; parts: [string, boolean][] }[],
+};
+
+export const belmere = {
+  side: ["Wollongong", "17 Levels", "80+ Residences", "CBD"],
+  small: "Wollongong’s newest",
+  big: "Belmeré",
+  body: "BELMERÉ — Wollongong’s newest landmark in modern city living. Rising 17 levels above the vibrant CBD.",
+  overlay: ["City living.", "Elevated."],
+  mono: "Over 80 impressive architecturally crafted residences designed for those who seek the perfect balance of urban convenience, coastal lifestyle, and contemporary sophistication.",
+  h2: ["A complete design and", "marketing campaign."],
+  mono2: ["LÉONCAPRI crafted the", "complete campaign."],
+  bottom: ["Rising 17 levels.", "Above the vibrant CBD."],
+  url: "https://belmerewollongong.com.au/",
+};
+
+export const sprezz = {
+  left: "“LÉON” draws from both the lion — a universal emblem of strength, leadership, and courage — and Leonardo da Vinci, symbolizing genius, invention, and artistic mastery.",
+  leftStrong: "Bold creativity, timeless intellect.",
+  right: "“CAPRI” evokes the famous Italian island — synonymous with beauty, culture, and refined luxury. It suggests an elevated aesthetic, where design is experiential and emotive.",
+  rightStrong: "Effortless elegance.",
+  word: "sprezzatura",
+  sign: "Izaac Trpeski",
+  cols: [
+    { t: "Design", v: "Every project is approached with authenticity and intent, crafted to inspire connection." },
+    { t: "Strategy", v: "A rare synergy between creative direction and development acumen. Outcomes that are visually compelling and commercially enduring." },
+    { t: "Story", v: "Building iconic brands, experiences, and high-performing results for the property world and beyond." },
+  ],
+};
+
+export const quote = {
+  text: "“Every project is approached with authenticity and intent, crafted to inspire connection, drive value, and leave a lasting impression” — Izaac",
+  // NEW — booking language.
+  cta: "Book a call with Izaac Trpeski",
+  ctaSub: "An initial discussion about your development. 45 minutes on Google Meet.",
+  note: "Izaac works closely on every engagement, so the studio accepts only a select number of projects at a time — and the calendar is often committed well ahead.",
+  meta: ["45 minutes", "Google Meet"],
+};
+
+export const coast = {
+  title: "Coast",
+  body: "Inspired by the dramatic Amalfi Coast-like escarpment where the steep mountains meet the sea, Coast is a series of 12 exceptional PRD designed residences.",
+  small: ["North Wollongong", "12 Residences"],
+  link: "coastwollongong.com.au",
+  url: "https://coastwollongong.com.au/",
+  concept: ["Brand", "Identity"],
+  crumbs: ["Concept", "Coastal"],
+  conceptBody: "Lush gardens by DSB Landscape Architects. Homes awash with stunning marble surfaces. The custom hand-crafted ‘COAST’ font draws light to the curves on each level.",
+  years: ["12", "PRD"],
+  trace: "Topography",
+  code: "COAST",
+  list: ["Custom typeface", "Circular logo device", "Place branding", "Marketing campaign"],
+  tagline: "The circular logo device incorporates topography patterns and pays homage to the local Dharawal nation.",
+};
+
+export const about = {
+  big: "I’m",
+  name: "Izaac Trpeski",
+  mono: "Founder / Creative Director. Two decades of design and property development.",
+  sign: "Independent creative director",
+  right: "Guided by over two decades of design and property development experience, Izaac brings a rare synergy between creative direction and development acumen.",
+  mid: [["I shape ", false], ["brands", true], [", ", false], ["stories", true], [" and ", false], ["strategies", true], [".", false]] as [string, boolean][],
+  midSub: ["Every project starts with a conversation.", "The best ones start early."],
+  quote: "“Design with purpose. Strategy with emotion. Stories that sell.”",
+  quoteBy: "— LÉONCAPRI",
+  things: ["Place naming", "Brand identity", "Brochures & flip books", "Web design", "CGI & photography", "Signage & hoarding", "Display suites", "Campaign direction"],
+};
+
+export const footer = {
+  big: "Book a Call",
+  studio: ["Consulting nationally", "and internationally.", "Based in New South Wales,", "Australia."],
+  word: "LÉONCAPRI",
 };
