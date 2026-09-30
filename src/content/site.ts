@@ -187,3 +187,35 @@ export const footer = {
   studio: ["Consulting nationally", "and internationally.", "Based in New South Wales,", "Australia."],
   word: "LÉONCAPRI",
 };
+
+/* ── v4 ─────────────────────────────────────────────────────────────── */
+
+export const facts = [
+  { k: "Established", v: "2022" },
+  { k: "Experience", v: "Over two decades" },
+  { k: "Practice", v: "Multi-disciplinary" },
+  { k: "Reach", v: "National & International" },
+];
+
+// Case studies (their work-highlights pages).
+export const featured = [
+  { slug: "luna", name: "Luna", place: "Huskisson — 15 residences", url: "https://lunahuskisson.com.au/", host: "lunahuskisson.com.au" },
+  { slug: "belmere", name: "Belmeré", place: "Wollongong — 17 levels, 80+ residences", url: "https://belmerewollongong.com.au/", host: "belmerewollongong.com.au" },
+  { slug: "coast", name: "Coast", place: "North Wollongong — 12 residences", url: "https://coastwollongong.com.au/", host: "coastwollongong.com.au" },
+];
+
+// Every other brand on their Work page.
+export const archive = [
+  { slug: "air", name: "Air" },
+  { slug: "otto", name: "Otto" },
+  { slug: "silk", name: "Silk" },
+  { slug: "knightsbridge", name: "Knightsbridge" },
+  { slug: "mara", name: "Mára" },
+  { slug: "paloma", name: "Paloma" },
+  { slug: "raya", name: "Raya" },
+  { slug: "noir", name: "Noir" },
+  { slug: "oasis", name: "Oasis" },
+  { slug: "natura", name: "Natura" },
+  { slug: "svt", name: "South Village Thirroul" },
+  { slug: "mind", name: "MIND" },
+];
