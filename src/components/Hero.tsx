@@ -22,7 +22,7 @@ function Word({ children, delay, className }: { children: string; delay: number;
   );
 }
 
-function Ticks({ delay }: { delay: number }) {
+export function Ticks({ delay }: { delay: number }) {
   const [on, setOn] = useState(0);
   useEffect(() => {
     let i = 0;
