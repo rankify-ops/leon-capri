@@ -34,19 +34,19 @@ export function About() {
     <section className="px relative z-10 bg-bg pb-20 pt-20 md:pt-28">
       <div className="grid gap-10 lg:grid-cols-[1fr_1fr_1fr] lg:gap-8">
         <div>
-          <h2 className="d text-[clamp(90px,10vw,170px)] leading-[0.8] text-grey">
+          <h2 className="d text-[clamp(90px,10vw,170px)] leading-[0.8] text-mute">
             <Rise>{about.big}</Rise>
           </h2>
           <p className="d2 mt-3 text-[clamp(28px,2.6vw,42px)] text-accent">
             <Rise delay={0.1}>{about.name}</Rise>
           </p>
-          <div className="mt-2 h-[3px] bg-white/25" />
+          <div className="mt-2 h-[3px] bg-line-2" />
           <p className="mono mt-3 text-fg-2">{about.mono}</p>
           <p className="mt-8 text-[22px] italic tracking-[-0.03em] text-fg-2">{site.founder}</p>
           <p className="mt-1 text-[11px] font-semibold">{about.sign}</p>
         </div>
         <div className="lg:pt-6">
-          <motion.div initial={{ opacity: 0, scale: 0.94 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 1.2, ease: EASE }}>
+          <motion.div className="lift" initial={{ opacity: 0, scale: 0.94 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} transition={{ duration: 1.2, ease: EASE }}>
             <Portrait />
           </motion.div>
         </div>
@@ -55,13 +55,13 @@ export function About() {
 
       <div className="mt-16 grid gap-10 lg:grid-cols-[1fr_1fr_1fr] lg:gap-8">
         <div className="lg:order-2">
-          <ScrollText className="d2 text-[clamp(26px,2.4vw,40px)] leading-[1]" parts={about.mid} dim="rgba(243,243,243,0.2)" color="#8a8d92" accent="#f3f3f3" />
+          <ScrollText className="d2 text-[clamp(26px,2.4vw,40px)] leading-[1]" parts={about.mid} color="#8a8d92" />
           <p className="mt-4 text-[12px] font-semibold text-fg-2">
             {about.midSub[0]}
             <br />
             {about.midSub[1]}
           </p>
-          <div className="mt-5 h-[3px] bg-white/25" />
+          <div className="mt-5 h-[3px] bg-line-2" />
           <p className="mt-6 text-[10px] font-semibold uppercase text-fg-3">Contact</p>
           <div className="mt-3 flex gap-4">
             {SOCIALS.map((s) => (
@@ -80,7 +80,7 @@ export function About() {
         <div className="lg:order-3 lg:self-end">
           <p className="text-[10px] font-semibold uppercase text-fg-3">Things I do</p>
           <div className="mt-2 flex gap-3">
-            <span className="w-[4px] bg-white/25" />
+            <span className="w-[4px] bg-line-2" />
             <ul className="text-[12px] font-bold uppercase leading-[1.25]">
               {about.things.map((t) => (
                 <li key={t}>{t}</li>
@@ -96,7 +96,7 @@ export function About() {
 
 export function Footer() {
   return (
-    <footer className="relative z-10 bg-accent text-ink">
+    <footer className="panel relative z-10 bg-accent text-ink">
       <div className="stripes h-14 text-ink/25" />
       <div className="px pt-4">
         <Book className="block">

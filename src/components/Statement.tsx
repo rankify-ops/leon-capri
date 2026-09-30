@@ -18,7 +18,7 @@ export function Statement() {
     <section id="about" className="relative z-10 -mt-[20vh] bg-bg pb-10 pt-[18vh]">
       <motion.div ref={ref} style={{ scale, y }} className="px mx-auto max-w-[1180px] origin-top">
         <div className="grid grid-cols-[38%_1fr] gap-3 md:grid-cols-[250px_1fr]">
-          <div className="relative aspect-[3/4] overflow-hidden bg-bg-2">
+          <div className="lift relative aspect-[3/4] overflow-hidden bg-bg-2">
             <Img slug="insight" alt="Insight — brand by LÉONCAPRI" className="bw h-full w-full object-cover" sizes="300px" />
             <WorkTag className="absolute bottom-2 left-2">Insight — LÉONCAPRI</WorkTag>
           </div>
@@ -66,7 +66,7 @@ function Floater({ s, i }: { s: (typeof scatter)[number]; i: number }) {
       className="bw-hover absolute left-[var(--lm)] w-[var(--wm)] origin-bottom md:left-[var(--l)] md:w-[var(--w)]"
     >
       {/* Natural aspect — never crop the brand marks out of the work. */}
-      <div className="overflow-hidden bg-bg-2">
+      <div className="lift overflow-hidden bg-bg-2">
         <Img slug={s.slug} alt={s.cap} className="bw h-auto w-full" sizes="25vw" />
       </div>
       <figcaption className="mono mt-2 text-[9px] text-fg-2 md:text-[10px]">
@@ -80,7 +80,7 @@ function Floater({ s, i }: { s: (typeof scatter)[number]; i: number }) {
 export function Scatter() {
   return (
     <section id="work" className="relative z-10 bg-bg">
-      <div className="px flex flex-wrap items-end justify-between gap-4 border-t border-white/15 pt-6">
+      <div className="px flex flex-wrap items-end justify-between gap-4 border-t border-line pt-6">
         <div>
           <p className="mono text-fg-3">{scatterHead.k}</p>
           <h2 className="d2 mt-2 text-[clamp(30px,3.6vw,56px)]">{scatterHead.t}</h2>

@@ -20,7 +20,11 @@
   --ink: #0a0a0a;
   --accent: #ffffff;
   --mid: #8a8d92;
-  --line: rgba(243, 243, 243, 0.14);
+  --line: rgba(243, 243, 243, 0.16);
+  --line-2: rgba(243, 243, 243, 0.26);
+  --mute: #d9d9d9;
+  --veil-a: rgba(5, 6, 9, 0.2);
+  --veil-b: rgba(5, 6, 9, 0.85);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
@@ -34,6 +38,9 @@
   --color-paper: var(--paper);
   --color-ink: var(--ink);
   --color-accent: var(--accent);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-mute: var(--mute);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-mono);
 }
@@ -52,6 +59,53 @@
 }
 
 @layer components {
+  /*
+   * Light theme (/v3). Wrapping the page in .light flips every token: paper
+   * ground, ink type, ink accents, hairlines in ink. The template's white
+   * panels (.panel) become bright cards and anything marked .lift floats on
+   * a cool, blue-grey layered shadow.
+   */
+  .light {
+    --bg: #f2f0ec;
+    --bg-2: #e6e3de;
+    --fg: #0a0a0a;
+    --fg-2: #4a4e53;
+    --fg-3: #8a8d92;
+    --accent: #0a0a0a;
+    --line: rgba(10, 10, 10, 0.12);
+    --line-2: rgba(10, 10, 10, 0.24);
+    --mute: #b3b5b8;
+    --veil-a: rgba(242, 240, 236, 0.45);
+    --veil-b: rgba(242, 240, 236, 0.93);
+    background: var(--bg);
+    color: var(--fg);
+  }
+  html:has(.light), html:has(.light) body { background: #f2f0ec; }
+  /* !important: .bg-accent (ink in light) is a utility and outranks this layer. */
+  .light .panel {
+    background: #ffffff !important;
+    box-shadow: 0 -1px 0 rgba(24, 32, 48, 0.04), 0 -30px 60px -34px rgba(24, 32, 48, 0.22), 0 30px 60px -34px rgba(24, 32, 48, 0.22);
+    position: relative;
+  }
+  .light .lift {
+    box-shadow:
+      0 1px 2px rgba(24, 32, 48, 0.06),
+      0 10px 22px -10px rgba(24, 32, 48, 0.18),
+      0 38px 80px -28px rgba(30, 42, 64, 0.32);
+    transition: box-shadow 0.8s var(--ease), transform 0.8s var(--ease);
+  }
+  .light .bw-hover:hover .lift,
+  .light .lift.hover-lift:hover {
+    transform: translateY(-6px);
+    box-shadow:
+      0 2px 4px rgba(24, 32, 48, 0.06),
+      0 18px 34px -12px rgba(24, 32, 48, 0.22),
+      0 60px 110px -30px rgba(30, 42, 64, 0.4);
+  }
+  .light .cta { color: #ffffff; }
+  .light .cta:hover { background: #3a3e43; }
+  .light .grain { opacity: 0.05; }
+
   /* Display: Inter bold, uppercase, very tight. */
   .d { font-weight: 600; text-transform: uppercase; letter-spacing: -0.055em; line-height: 0.92; }
   .d2 { font-weight: 600; text-transform: uppercase; letter-spacing: -0.045em; line-height: 0.98; }

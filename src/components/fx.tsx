@@ -1,11 +1,24 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
 import { motion, useInView, useScroll, useTransform, type MotionValue } from "motion/react";
 import { asset } from "@/lib/basePath";
 import { site } from "@/content/site";
 
 export const EASE = [0.16, 1, 0.3, 1] as const;
+
+/** "light" on /v3: flips CSS tokens (.light) and the scroll-lit text colours. */
+export const ToneCtx = createContext<"dark" | "light">("dark");
+export function useTone() {
+  return useContext(ToneCtx);
+}
+export function LightTheme({ children }: { children: React.ReactNode }) {
+  return (
+    <ToneCtx.Provider value="light">
+      <div className="light">{children}</div>
+    </ToneCtx.Provider>
+  );
+}
 
 /** 800/1600/2400 webp set from scripts/media.mjs. */
 export function Img({ slug, alt = "", className = "", sizes = "100vw", eager = false }: { slug: string; alt?: string; className?: string; sizes?: string; eager?: boolean }) {
@@ -119,9 +132,9 @@ export function ScrollText({
   parts,
   by = "word",
   className = "",
-  dim = "rgba(243,243,243,0.22)",
-  color = "var(--fg)",
-  accent = "var(--accent)",
+  dim,
+  color,
+  accent,
   offset = ["start 0.85", "end 0.45"],
 }: {
   parts: [string, boolean][];
@@ -133,6 +146,10 @@ export function ScrollText({
   offset?: [string, string];
 }) {
   const ref = useRef<HTMLParagraphElement>(null);
+  const light = useTone() === "light";
+  dim ??= light ? "rgba(10,10,10,0.14)" : "rgba(243,243,243,0.22)";
+  color ??= light ? "#0a0a0a" : "#f3f3f3";
+  accent ??= light ? "#0a0a0a" : "#ffffff";
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { scrollYProgress } = useScroll({ target: ref, offset: offset as any });
   const tokens: { t: string; a: boolean }[] = [];

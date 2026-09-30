@@ -5,13 +5,14 @@ import { NameGrid, Settle } from "@/components/Name";
 import { Belmere, Luna, Services } from "@/components/Work";
 import { Coast, Quote, Sprezz } from "@/components/Story";
 import { About, Footer } from "@/components/About";
-import { CalLoader } from "@/components/fx";
+import { CalLoader, LightTheme } from "@/components/fx";
 
-// v3: v2 with a light hero — Coast exterior (car + sign) in colour, ink type.
+// v3: light throughout: Coast exterior hero, paper ground, ink type, cool shadows.
 export default function HomeV3() {
   return (
     <>
       <Header />
+      <LightTheme>
       <main>
         <HeroCoast />
         <Statement />
@@ -27,6 +28,7 @@ export default function HomeV3() {
         <About />
       </main>
       <Footer />
+      </LightTheme>
       <div className="grain" aria-hidden />
       <CalLoader />
     </>

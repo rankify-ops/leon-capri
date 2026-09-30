@@ -33,7 +33,7 @@ export function NameGrid() {
       </div>
 
       <div>
-        <motion.div style={{ y: panelY }} className="bg-grey px-4 pb-10 pt-24 text-ink md:min-h-[62vh] md:px-6 md:pt-28">
+        <motion.div style={{ y: panelY }} className="lift relative z-10 bg-grey px-4 pb-10 pt-24 text-ink md:min-h-[62vh] md:px-6 md:pt-28">
           <h3 className="d text-[clamp(40px,5.4vw,84px)]">
             <Rise>{name.title[0]}</Rise>
             <Rise delay={0.1} className="text-white">
@@ -74,11 +74,11 @@ export function Settle() {
       <motion.div style={{ y: bgY }} className="absolute inset-[-12%_0]">
         <Img slug="terrain" alt="" className="bw h-full w-full object-cover opacity-50" />
       </motion.div>
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(5,6,9,0.2),rgba(5,6,9,0.85))]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,var(--veil-a),var(--veil-b))]" />
       <div className="px relative flex min-h-[120vh] flex-col justify-between pb-10 pt-[18vh]">
         <div className="text-center">
           <motion.p
-            className="inline-block bg-accent px-1 text-[10px] font-semibold uppercase text-ink"
+            className="inline-block bg-accent px-1 text-[10px] font-semibold uppercase text-bg"
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
@@ -108,7 +108,7 @@ export function Settle() {
               transition={{ duration: 0.9, ease: EASE, delay: i * 0.1 }}
             >
               <p className="text-[12px] font-semibold uppercase">{m.k}</p>
-              <div className="relative mt-2 h-px bg-white/30">
+              <div className="relative mt-2 h-px bg-line-2">
                 <span className="absolute left-0 top-[-1px] h-[3px] w-4 bg-accent" />
               </div>
               <p className="mt-3 text-[13px] font-semibold uppercase tracking-[-0.02em]">{m.t}</p>

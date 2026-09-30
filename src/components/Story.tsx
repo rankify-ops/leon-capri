@@ -44,7 +44,7 @@ export function Sprezz() {
         <div className="mx-auto grid max-w-[1140px] gap-10 md:grid-cols-3">
           {sprezz.cols.map((c, i) => (
             <motion.div key={c.t} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.8, ease: EASE, delay: i * 0.1 }}>
-              <p className="flex items-center gap-2 border-b border-white/20 pb-2 text-[14px] font-bold uppercase">
+              <p className="flex items-center gap-2 border-b border-line-2 pb-2 text-[14px] font-bold uppercase">
                 <span className="inline-block h-2.5 w-2.5 rounded-full border-2 border-accent" /> {c.t}
               </p>
               <p className="mono mt-3 text-[10px] text-fg-2">{c.v}</p>
@@ -59,7 +59,7 @@ export function Sprezz() {
 /** Accent panel: the quote fills in character by character; booking card beside it. */
 export function Quote() {
   return (
-    <section className="relative z-10 grid gap-8 bg-accent px-4 py-16 text-ink md:grid-cols-2 md:px-6 md:py-24">
+    <section className="panel relative z-10 grid gap-8 bg-accent px-4 py-16 text-ink md:grid-cols-2 md:px-6 md:py-24">
       <div className="md:sticky md:top-24 md:self-start">
         <ScrollText
           by="char"
@@ -71,14 +71,14 @@ export function Quote() {
         />
       </div>
       <div>
-        <div className="placeholder-dark relative flex aspect-[5/4] items-end justify-between overflow-hidden bg-ink p-5 text-fg">
+        <div className="placeholder-dark lift relative flex aspect-[5/4] items-end justify-between overflow-hidden bg-ink p-5 text-fg">
           {/* PLACEHOLDER — Izaac's portrait goes here. */}
           <div className="absolute inset-0 bg-[radial-gradient(90%_70%_at_60%_30%,#2a2d31,#0a0a0a)]" />
           <p className="mono relative text-fg-2">Portrait</p>
           <p className="mono relative text-fg-2">{site.founder}</p>
         </div>
         <Book className="group mt-5 flex items-center gap-3">
-          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-ink text-accent transition-transform duration-500 group-hover:scale-110">
+          <span className="flex h-6 w-6 items-center justify-center rounded-full bg-ink text-white transition-transform duration-500 group-hover:scale-110">
             <svg width="10" height="10" viewBox="0 0 10 10" aria-hidden>
               <path d="M2 1l7 4-7 4z" fill="currentColor" />
             </svg>
@@ -131,7 +131,7 @@ export function Coast() {
           {/* Frosted panel. No video under it, so blur is safe here. */}
           <motion.div
             style={{ y: glassY }}
-            className="absolute inset-x-0 bottom-0 hidden h-[70%] bg-white/55 backdrop-blur-2xl md:block"
+            className="lift absolute inset-x-0 bottom-0 hidden h-[70%] bg-white/55 backdrop-blur-2xl md:block"
           >
             <div className="hstripes absolute bottom-10 left-6 top-10 w-14 text-ink/15" />
             <div className="absolute left-[28%] top-[16%] max-w-[560px]">
@@ -155,7 +155,7 @@ export function Coast() {
 
       <div className="px grid items-center gap-8 bg-paper pb-20 pt-10 md:grid-cols-[auto_1fr] md:pl-[14%]">
         <motion.div
-          className="w-[62vw] max-w-[300px] overflow-hidden"
+          className="lift w-[62vw] max-w-[300px] overflow-hidden"
           initial={{ clipPath: "inset(0 100% 0 0)" }}
           whileInView={{ clipPath: "inset(0 0% 0 0)" }}
           viewport={{ once: true }}

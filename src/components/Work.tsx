@@ -16,7 +16,7 @@ export function Luna() {
 
   return (
     <section ref={ref} className="relative z-10 grid bg-bg md:grid-cols-2">
-      <div className="relative bg-accent px-4 pb-8 pt-20 text-ink md:min-h-[100svh] md:px-6 md:pt-24">
+      <div className="panel relative bg-accent px-4 pb-8 pt-20 text-ink md:min-h-[100svh] md:px-6 md:pt-24">
         <div className="hstripes absolute inset-y-0 right-0 hidden w-14 text-ink/15 md:block" />
         <h2 className="d text-[clamp(48px,6vw,96px)]">
           <Rise>{luna.title[0]}</Rise>
@@ -53,7 +53,7 @@ export function Luna() {
           {luna.thumbs.map((t, i) => (
             <motion.div
               key={t}
-              className="flex h-16 w-16 items-center justify-center bg-ink/10 p-1.5 md:h-20 md:w-20"
+              className="lift flex h-16 w-16 items-center justify-center bg-ink/10 p-1.5 md:h-20 md:w-20"
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -99,7 +99,7 @@ export function Services() {
       <div className="mt-6 flex items-center gap-3">
         <span className="mono whitespace-nowrap text-[10px] text-fg-2">▣ {services.bar[0]}</span>
         <motion.span
-          className="h-[3px] flex-1 origin-left bg-white/25"
+          className="h-[3px] flex-1 origin-left bg-line-2"
           initial={{ scaleX: 0 }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
@@ -110,13 +110,13 @@ export function Services() {
 
       <div className="mt-16 md:mt-24">
         {services.rows.map((r, i) => (
-          <div key={r.t} className="grid gap-6 border-b border-white/15 py-10 md:grid-cols-[1fr_1px_1fr] md:gap-8 md:py-12">
+          <div key={r.t} className="grid gap-6 border-b border-line py-10 md:grid-cols-[1fr_1px_1fr] md:gap-8 md:py-12">
             <div className="relative flex flex-col">
               <p className="mono text-[9px] text-fg-3">{r.k}</p>
               <h3 className="d2 mt-3 text-[clamp(26px,2.6vw,40px)]">{r.t}</h3>
               <span className="mt-3 flex flex-col gap-[3px]" aria-hidden>
                 {[0, 1, 2, 3].map((k) => (
-                  <i key={k} className={`block h-px ${k === 1 ? "w-4 bg-accent" : "w-3 bg-white/40"}`} />
+                  <i key={k} className={`block h-px ${k === 1 ? "w-4 bg-accent" : "w-3 bg-line-2"}`} />
                 ))}
               </span>
               <p className="mono mt-auto pt-10 text-[10px] text-fg-3">
@@ -125,7 +125,7 @@ export function Services() {
               </p>
               <span className="absolute right-0 top-0 text-[22px] text-fg-3 transition-transform duration-500 hover:translate-x-1">→</span>
             </div>
-            <span className="hidden w-[5px] bg-white/20 md:block" />
+            <span className="hidden w-[5px] bg-line-2 md:block" />
             <ScrollText className="d2 text-[clamp(22px,2.3vw,36px)] leading-[1]" parts={r.parts} color="#8a8d92" />
           </div>
         ))}
@@ -176,7 +176,7 @@ export function Belmere() {
         <p className="mono mt-[30vh] max-w-[380px] text-[10px] text-ink/70">{belmere.mono}</p>
         <div className="mt-10 grid gap-6 md:mt-16">
           <motion.div
-            className="w-[70%] max-w-[300px] overflow-hidden md:w-[42%]"
+            className="lift w-[70%] max-w-[300px] overflow-hidden md:w-[42%]"
             initial={{ clipPath: "inset(100% 0 0 0)" }}
             whileInView={{ clipPath: "inset(0% 0 0 0)" }}
             viewport={{ once: true, margin: "0px 0px -10% 0px" }}
