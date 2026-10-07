@@ -199,3 +199,10 @@
   .v5-strip { scrollbar-width: none; -webkit-overflow-scrolling: touch; }
   .v5-strip::-webkit-scrollbar { display: none; }
 }
+
+/* Lenis (v5): recommended base styles. */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+.lenis.lenis-stopped { overflow: clip; }
+/* (Lenis docs also disable iframe pointer events — omitted: it would break the Cal.com booking popup.) */

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "motion/react";
+import Lenis from "lenis";
 import { asset } from "@/lib/basePath";
 import { site } from "@/content/site";
 import { Book, EASE, Img, Logo } from "./fx";
@@ -51,7 +52,21 @@ function Arrow({ children, href, book = false, className = "" }: { children: Rea
 }
 
 function H2({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <h2 className={`v5-h text-[clamp(40px,5.6vw,80px)] ${className}`}>{children}</h2>;
+  return <h2 className={`v5-h text-[50px] md:text-[clamp(56px,5.6vw,80px)] ${className}`}>{children}</h2>;
+}
+
+/* ── smooth scroll ───────────────────────────────────────────────────
+ * The "keeps gliding after you stop" feel on knownby.studio is Lenis
+ * (v1.2.3, same as theirs): wheel input is eased, so the page settles over
+ * ~1s instead of stopping dead. Anchor links glide too. Skipped for
+ * reduced motion; touch keeps native momentum (Lenis default). */
+export function SmoothScroll() {
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const lenis = new Lenis({ autoRaf: true, anchors: { offset: -60 } });
+    return () => lenis.destroy();
+  }, []);
+  return null;
 }
 
 /* ── header ──────────────────────────────────────────────────────────── */
@@ -351,10 +366,10 @@ export function Work5() {
         >
           <div ref={track} className="flex w-max will-change-transform">
             {[0, 1].map((copy) => (
-              <div key={copy} ref={copy === 0 ? set : undefined} className="flex gap-4 pr-4 md:gap-6 md:pr-6" aria-hidden={copy === 1}>
+              <div key={copy} ref={copy === 0 ? set : undefined} className="flex gap-3 pr-3 md:gap-5 md:pr-5" aria-hidden={copy === 1}>
                 {WORK.map((w) => (
                   <figure key={w.slug} className="group shrink-0">
-                    <div className="h-[260px] overflow-hidden bg-[#f1eee9] md:h-[400px]" style={{ aspectRatio: w.ar }}>
+                    <div className="w-[208px] overflow-hidden bg-[#f1eee9] md:w-[400px]" style={{ aspectRatio: "3 / 2" }}>
                       <Img
                         slug={w.slug}
                         alt={copy === 0 ? `${w.name} — by LÉONCAPRI` : ""}
@@ -362,10 +377,7 @@ export function Work5() {
                         className="pointer-events-none h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
                       />
                     </div>
-                    <figcaption className="mt-3 whitespace-nowrap">
-                      <span className="v5-serif text-[16px]">{w.name}</span>
-                      {w.note && <span className="ml-3 text-[13px] opacity-60">{w.note}</span>}
-                    </figcaption>
+                    <figcaption className="v5-serif mt-2.5 whitespace-nowrap text-[14px] md:mt-3 md:text-[16px]">{w.name}</figcaption>
                   </figure>
                 ))}
               </div>

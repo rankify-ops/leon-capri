@@ -1,5 +1,5 @@
 import { Inter_Tight, Newsreader } from "next/font/google";
-import { About5, Contact5, Footer5, Header5, Hero5, Intro5, Quote5, Services5, Work5 } from "@/components/V5";
+import { About5, Contact5, Footer5, Header5, Hero5, Intro5, Quote5, Services5, SmoothScroll, Work5 } from "@/components/V5";
 import { CalLoader, Tone } from "@/components/fx";
 
 // Known By uses Die Grotesk A (medium, tight) + GT Alpina (serif captions/nav);
@@ -24,6 +24,7 @@ export default function HomeV5() {
       </main>
       <Footer5 />
       <CalLoader />
+      <SmoothScroll />
     </div>
     </Tone>
   );
