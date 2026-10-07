@@ -184,3 +184,18 @@
   }
   .cta:hover { background: var(--grey); }
 }
+
+/* ── v5 (knownby.studio structure) ─────────────────────────────────────
+ * Scoped to .v5 so v1–v4 are untouched: white ground, warm brown-black ink,
+ * medium tight grotesk headings, small serif for captions and nav. */
+@layer components {
+  .v5 { background: #ffffff; color: #291c10; font-family: var(--v5-sans), "Helvetica Neue", Arial, sans-serif; }
+  html:has(.v5), html:has(.v5) body { background: #ffffff; }
+  .v5 ::selection { background: #291c10; color: #ffffff; }
+  .v5-h { font-family: var(--v5-sans), sans-serif; font-weight: 500; letter-spacing: -0.03em; line-height: 1; }
+  .v5-serif { font-family: var(--v5-serif), Georgia, "Times New Roman", serif; font-weight: 400; }
+  .v5-px { padding-inline: 16px; }
+  @media (min-width: 768px) { .v5-px { padding-inline: 24px; } }
+  .v5-strip { scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+  .v5-strip::-webkit-scrollbar { display: none; }
+}

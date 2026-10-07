@@ -12,6 +12,10 @@ export const ToneCtx = createContext<"dark" | "light">("dark");
 export function useTone() {
   return useContext(ToneCtx);
 }
+/** Sets the tone without the .light CSS scope (v5 brings its own styles). */
+export function Tone({ value, children }: { value: "dark" | "light"; children: React.ReactNode }) {
+  return <ToneCtx.Provider value={value}>{children}</ToneCtx.Provider>;
+}
 export function LightTheme({ children }: { children: React.ReactNode }) {
   return (
     <ToneCtx.Provider value="light">
@@ -175,6 +179,7 @@ export function ScrollText({
 
 /** Opens Izaac's Cal.com calendar as a popup; falls back to the booking page. */
 export function Book({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  const theme = useTone();
   return (
     <a
       href={site.calUrl}
@@ -182,7 +187,7 @@ export function Book({ children, className = "" }: { children: React.ReactNode; 
       rel="noopener"
       data-cal-link={site.calLink}
       data-cal-namespace="lc"
-      data-cal-config='{"layout":"month_view","theme":"dark"}'
+      data-cal-config={JSON.stringify({ layout: "month_view", theme })}
       onClick={(e) => {
         if ((window as unknown as { Cal?: { loaded?: boolean } }).Cal?.loaded && document.querySelector("script[src*='embed/embed.js']")) e.preventDefault();
       }}
