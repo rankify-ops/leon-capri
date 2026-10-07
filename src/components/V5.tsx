@@ -236,11 +236,63 @@ const WORK = [
   { slug: "mind", name: "MIND", ar: 2 },
 ];
 
-export function Work5() {
-  const strip = useRef<HTMLDivElement>(null);
-  const drag = useRef({ down: false, x: 0, left: 0, moved: false });
+const SPEED = 32; // px per second — slow, continuous drift
 
-  const nudge = (dir: 1 | -1) => strip.current?.scrollBy({ left: dir * strip.current.clientWidth * 0.7, behavior: "smooth" });
+/**
+ * "Our work": an endless, slowly drifting strip. Two copies of the list sit
+ * side by side and the track is translated (GPU transform, sub-pixel smooth)
+ * by an offset that wraps at one copy's width, so the loop never jumps.
+ * Hover eases it to a stop; drag (mouse or touch) and the arrows move it.
+ */
+export function Work5() {
+  const viewport = useRef<HTMLDivElement>(null);
+  const track = useRef<HTMLDivElement>(null);
+  const set = useRef<HTMLDivElement>(null);
+  const st = useRef({ offset: 0, speed: SPEED, target: SPEED, dragging: false, lastX: 0, tween: null as null | { from: number; to: number; t0: number } });
+
+  useEffect(() => {
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const s = st.current;
+    if (reduced) s.speed = s.target = 0;
+    let raf = 0;
+    let last = performance.now();
+    let visible = true;
+    const io = new IntersectionObserver(([e]) => (visible = e.isIntersecting));
+    if (viewport.current) io.observe(viewport.current);
+
+    const frame = (now: number) => {
+      const dt = Math.min(0.05, (now - last) / 1000);
+      last = now;
+      const w = set.current?.offsetWidth ?? 0;
+      if (w && visible) {
+        // Ease the speed toward its target (hover stop / resume feels soft).
+        s.speed += (s.target - s.speed) * Math.min(1, dt * 3);
+        if (s.tween) {
+          if (s.tween.t0 < 0) s.tween.t0 = now;
+          const k = Math.min(1, (now - s.tween.t0) / 700);
+          const e = 1 - Math.pow(1 - k, 3);
+          s.offset = s.tween.from + (s.tween.to - s.tween.from) * e;
+          if (k >= 1) s.tween = null;
+        } else if (!s.dragging) {
+          s.offset += s.speed * dt;
+        }
+        const x = ((s.offset % w) + w) % w;
+        if (track.current) track.current.style.transform = `translate3d(${-x}px,0,0)`;
+      }
+      raf = requestAnimationFrame(frame);
+    };
+    raf = requestAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(raf);
+      io.disconnect();
+    };
+  }, []);
+
+  const nudge = (dir: 1 | -1) => {
+    const s = st.current;
+    const step = (viewport.current?.clientWidth ?? 800) * 0.6;
+    s.tween = { from: s.offset, to: s.offset + dir * step, t0: -1 }; // stamped by the frame loop
+  };
 
   return (
     <section id="work" className="scroll-mt-16 border-t border-black/10 pb-20 pt-16 md:pb-28 md:pt-24">
@@ -267,43 +319,60 @@ export function Work5() {
         </div>
       </div>
 
-      <div
-        ref={strip}
-        className="v5-strip mt-10 flex cursor-grab gap-4 overflow-x-auto pb-4 active:cursor-grabbing md:mt-14 md:gap-6"
-        onPointerDown={(e) => {
-          const el = strip.current;
-          if (!el || e.pointerType !== "mouse") return;
-          drag.current = { down: true, x: e.clientX, left: el.scrollLeft, moved: false };
-        }}
-        onPointerMove={(e) => {
-          const el = strip.current;
-          if (!el || !drag.current.down) return;
-          const dx = e.clientX - drag.current.x;
-          if (Math.abs(dx) > 4) drag.current.moved = true;
-          el.scrollLeft = drag.current.left - dx;
-        }}
-        onPointerUp={() => (drag.current.down = false)}
-        onPointerLeave={() => (drag.current.down = false)}
-      >
-        {WORK.map((w, i) => (
-          <motion.figure
-            key={w.slug}
-            className="group shrink-0 first:ml-4 last:mr-4 md:first:ml-6 md:last:mr-6"
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, ease: EASE, delay: Math.min(i, 4) * 0.08 }}
-          >
-            <div className="h-[260px] overflow-hidden bg-[#f1eee9] md:h-[400px]" style={{ aspectRatio: w.ar }}>
-              <Img slug={w.slug} alt={`${w.name} — by LÉONCAPRI`} sizes="40vw" className="pointer-events-none h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
-            </div>
-            <figcaption className="mt-3">
-              <span className="v5-serif text-[16px]">{w.name}</span>
-              {w.note && <span className="ml-3 text-[13px] opacity-60">{w.note}</span>}
-            </figcaption>
-          </motion.figure>
-        ))}
-      </div>
+      <Fade delay={0.1}>
+        <div
+          ref={viewport}
+          className="mt-10 cursor-grab touch-pan-y select-none overflow-hidden pb-4 active:cursor-grabbing md:mt-14"
+          onPointerEnter={(e) => e.pointerType === "mouse" && (st.current.target = 0)}
+          onPointerLeave={() => {
+            st.current.target = SPEED;
+            st.current.dragging = false;
+          }}
+          onPointerDown={(e) => {
+            st.current.dragging = true;
+            st.current.tween = null;
+            st.current.lastX = e.clientX;
+            (e.currentTarget as HTMLDivElement).setPointerCapture(e.pointerId);
+          }}
+          onPointerMove={(e) => {
+            const s = st.current;
+            if (!s.dragging) return;
+            s.offset -= e.clientX - s.lastX;
+            s.lastX = e.clientX;
+          }}
+          onPointerUp={(e) => {
+            st.current.dragging = false;
+            if (e.pointerType !== "mouse") st.current.target = SPEED;
+          }}
+          onPointerCancel={() => {
+            st.current.dragging = false;
+            st.current.target = SPEED;
+          }}
+        >
+          <div ref={track} className="flex w-max will-change-transform">
+            {[0, 1].map((copy) => (
+              <div key={copy} ref={copy === 0 ? set : undefined} className="flex gap-4 pr-4 md:gap-6 md:pr-6" aria-hidden={copy === 1}>
+                {WORK.map((w) => (
+                  <figure key={w.slug} className="group shrink-0">
+                    <div className="h-[260px] overflow-hidden bg-[#f1eee9] md:h-[400px]" style={{ aspectRatio: w.ar }}>
+                      <Img
+                        slug={w.slug}
+                        alt={copy === 0 ? `${w.name} — by LÉONCAPRI` : ""}
+                        sizes="40vw"
+                        className="pointer-events-none h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+                      />
+                    </div>
+                    <figcaption className="mt-3 whitespace-nowrap">
+                      <span className="v5-serif text-[16px]">{w.name}</span>
+                      {w.note && <span className="ml-3 text-[13px] opacity-60">{w.note}</span>}
+                    </figcaption>
+                  </figure>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </Fade>
     </section>
   );
 }
