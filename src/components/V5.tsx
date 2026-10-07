@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import Lenis from "lenis";
 import { asset } from "@/lib/basePath";
 import { site } from "@/content/site";
-import { Book, EASE, Img, Logo } from "./fx";
+import { Book, EASE, Img, Logo, Type } from "./fx";
 
 /*
  * v5 — rebuilt on the knownby.studio structure: white ground, warm
@@ -18,7 +18,7 @@ const INK = "#291c10";
 
 /* ── small parts ─────────────────────────────────────────────────────── */
 
-function Fade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
+export function Fade({ children, className = "", delay = 0 }: { children: React.ReactNode; className?: string; delay?: number }) {
   return (
     <motion.div
       className={className}
@@ -33,7 +33,7 @@ function Fade({ children, className = "", delay = 0 }: { children: React.ReactNo
 }
 
 /** Underlined text link with the ↗ arrow, Known By style. */
-function Arrow({ children, href, book = false, className = "" }: { children: React.ReactNode; href?: string; book?: boolean; className?: string }) {
+export function Arrow({ children, href, book = false, className = "" }: { children: React.ReactNode; href?: string; book?: boolean; className?: string }) {
   const inner = (
     <>
       <span>{children}</span>
@@ -51,7 +51,7 @@ function Arrow({ children, href, book = false, className = "" }: { children: Rea
   );
 }
 
-function H2({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+export function H2({ children, className = "" }: { children: React.ReactNode; className?: string }) {
   return <h2 className={`v5-h text-[50px] md:text-[clamp(56px,5.6vw,80px)] ${className}`}>{children}</h2>;
 }
 
@@ -77,7 +77,7 @@ const NAV = [
   { href: "#about", label: "About" },
 ];
 
-export function Header5() {
+export function Header5({ glass = false, roll = false }: { glass?: boolean; roll?: boolean } = {}) {
   const [solid, setSolid] = useState(false);
   useEffect(() => {
     const on = () => setSolid(window.scrollY > window.innerHeight - 80);
@@ -87,7 +87,7 @@ export function Header5() {
   }, []);
   return (
     <header
-      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${solid ? "border-b border-black/10 bg-white text-[#291c10]" : "text-white"}`}
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-500 ${solid ? `border-b border-black/10 text-[#291c10] ${glass ? "bg-white/65 backdrop-blur-xl backdrop-saturate-150" : "bg-white"}` : "text-white"}`}
     >
       <div className="v5-px grid h-[60px] grid-cols-[1fr_auto] items-center gap-4 md:grid-cols-[1fr_auto_1fr]">
         <a href="#top" aria-label="LÉONCAPRI — top">
@@ -95,8 +95,15 @@ export function Header5() {
         </a>
         <nav className="v5-serif hidden items-center gap-6 text-[15px] md:flex" aria-label="Sections">
           {NAV.map((n) => (
-            <a key={n.href} href={n.href} className="transition-opacity hover:opacity-60">
-              {n.label}
+            <a key={n.href} href={n.href} className={roll ? "" : "transition-opacity hover:opacity-60"}>
+              {roll ? (
+                <span className="roll">
+                  <span>{n.label}</span>
+                  <span aria-hidden>{n.label}</span>
+                </span>
+              ) : (
+                n.label
+              )}
             </a>
           ))}
         </nav>
@@ -109,14 +116,15 @@ export function Header5() {
 /* ── hero: showreel of his projects ──────────────────────────────────── */
 
 const SLIDES = [
-  { src: "/img/coast-ext-2400.webp", name: "Coast", place: "North Wollongong", pos: "40% 55%" },
+  // Opens on the Coast sunset render (Tom didn't want the car shot first).
   { src: "/img/coast-sunset-2400.webp", name: "Coast", place: "North Wollongong", pos: "60% 50%" },
   { src: "/img/belmere-day.jpg", name: "Belmeré", place: "Wollongong", pos: "30% 50%" },
   { src: "/img/luna-sand-2400.webp", name: "Luna", place: "Huskisson", pos: "50% 50%" },
+  { src: "/img/coast-ext-2400.webp", name: "Coast", place: "North Wollongong", pos: "40% 55%" },
 ];
 const HOLD = 5200;
 
-export function Hero5() {
+export function Hero5({ typed = false }: { typed?: boolean } = {}) {
   const [i, setI] = useState(0);
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
@@ -166,13 +174,21 @@ export function Hero5() {
       </div>
 
       <div className="v5-px absolute inset-x-0 bottom-5 flex items-end justify-between gap-6 md:bottom-6">
-        <p className="v5-serif text-[14px] leading-[1.3] md:text-[16px]">
-          Shape the story. Sell the vision.
-          <br />
-          Branding, Design &amp; Marketing Studio
-          <br />
-          New South Wales, Australia
-        </p>
+        {typed ? (
+          <p className="v5-serif text-[14px] leading-[1.3] md:text-[16px]">
+            <Type className="block" text="Shape the story. Sell the vision." delay={0.6} />
+            <Type className="block" text="Branding, Design & Marketing Studio" delay={1.6} speed={22} />
+            <Type className="block" text="New South Wales, Australia" delay={2.5} speed={22} />
+          </p>
+        ) : (
+          <p className="v5-serif text-[14px] leading-[1.3] md:text-[16px]">
+            Shape the story. Sell the vision.
+            <br />
+            Branding, Design &amp; Marketing Studio
+            <br />
+            New South Wales, Australia
+          </p>
+        )}
         <div className="text-right">
           <p className="v5-serif text-[14px] md:text-[16px]">
             {s.name} — {s.place}
@@ -259,7 +275,7 @@ const SPEED = 32; // px per second — slow, continuous drift
  * by an offset that wraps at one copy's width, so the loop never jumps.
  * Hover eases it to a stop; drag (mouse or touch) and the arrows move it.
  */
-export function Work5() {
+export function Work5({ tags = false, lift = false }: { tags?: boolean; lift?: boolean } = {}) {
   const viewport = useRef<HTMLDivElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const set = useRef<HTMLDivElement>(null);
@@ -367,9 +383,17 @@ export function Work5() {
           <div ref={track} className="flex w-max will-change-transform">
             {[0, 1].map((copy) => (
               <div key={copy} ref={copy === 0 ? set : undefined} className="flex gap-3 pr-3 md:gap-5 md:pr-5" aria-hidden={copy === 1}>
-                {WORK.map((w) => (
-                  <figure key={w.slug} className="group shrink-0">
-                    <div className="w-[208px] overflow-hidden bg-[#f1eee9] md:w-[400px]" style={{ aspectRatio: "3 / 2" }}>
+                {WORK.map((w, k) => (
+                  <figure key={w.slug} className={`group shrink-0 ${lift ? "py-6" : ""}`}>
+                    <div
+                      className={`relative w-[208px] overflow-hidden bg-[#f1eee9] md:w-[400px] ${lift ? "v6-lift" : ""}`}
+                      style={{ aspectRatio: "3 / 2" }}
+                    >
+                      {tags && k < 3 && (
+                        <span className="v5-serif absolute left-2 top-2 z-10 bg-white/90 px-1.5 py-0.5 text-[11px] text-[#291c10] backdrop-blur md:left-3 md:top-3 md:text-[12px]">
+                          Case study 0{k + 1}
+                        </span>
+                      )}
                       <Img
                         slug={w.slug}
                         alt={copy === 0 ? `${w.name} — by LÉONCAPRI` : ""}
@@ -391,7 +415,7 @@ export function Work5() {
 
 /* ── services ────────────────────────────────────────────────────────── */
 
-const SERVICES = [
+export const SERVICES = [
   { t: "Brand Identity", d: "Place naming, strategic brand positioning, brand style guides, art & creative direction." },
   { t: "Print Design", d: "Brochures, floor plans, agent flip books, finishes boards, information memorandums." },
   { t: "Digital Design & Production", d: "Web design & development, social media campaigns, lead generation, CGI renders and animations." },
@@ -609,7 +633,7 @@ function SydneyTime() {
   return <span suppressHydrationWarning>{t}</span>;
 }
 
-export function Footer5() {
+export function Footer5({ bigLogo = false }: { bigLogo?: boolean } = {}) {
   const cols = [
     { h: "Pages", items: [["Home", "#top"], ["Work", "#work"], ["Services", "#services"], ["About", "#about"], ["Book a call", "#book"]] },
     { h: "Services", items: SERVICES.map((s) => [s.t, "#services"]) },
@@ -638,12 +662,25 @@ export function Footer5() {
           </div>
         ))}
       </div>
-      <div className="mt-20 flex items-end justify-between gap-6 border-t border-white/15 pt-6 md:mt-28">
-        <Logo className="w-[200px] md:w-[300px]" />
-        <p className="v5-serif text-[14px] text-white/80">
-          <SydneyTime />
-        </p>
-      </div>
+      {bigLogo ? (
+        <>
+          <div className="mt-20 overflow-hidden border-t border-white/15 pt-8 md:mt-28">
+            <motion.div initial={{ y: "60%", opacity: 0 }} whileInView={{ y: 0, opacity: 1 }} viewport={{ once: true }} transition={{ duration: 1.4, ease: EASE }}>
+              <Logo className="w-full" />
+            </motion.div>
+          </div>
+          <p className="v5-serif mt-6 text-right text-[14px] text-white/80">
+            <SydneyTime />
+          </p>
+        </>
+      ) : (
+        <div className="mt-20 flex items-end justify-between gap-6 border-t border-white/15 pt-6 md:mt-28">
+          <Logo className="w-[200px] md:w-[300px]" />
+          <p className="v5-serif text-[14px] text-white/80">
+            <SydneyTime />
+          </p>
+        </div>
+      )}
       <p className="v5-serif mt-6 text-[12px] text-white/50">© {new Date().getFullYear()} LÉONCAPRI</p>
     </footer>
   );
