@@ -113,15 +113,37 @@ export function Header5({ glass = false, roll = false }: { glass?: boolean; roll
   );
 }
 
+/* Project logos traced from LÉONCAPRI's own brand boards (coast-s1,
+ * luna-grid, belmere-s1) into public/img/logo-*.svg; drawn as a mask so they
+ * take the text colour. Widths keep the three visually balanced. */
+const MARKS = {
+  coast: { vb: [4937, 855], w: "w-[min(78vw,700px)]" },
+  luna: { vb: [2546, 1018], w: "w-[min(46vw,380px)]" },
+  belmere: { vb: [2790, 867], w: "w-[min(60vw,460px)]" },
+} as const;
+
+function BrandMark({ name, label }: { name: keyof typeof MARKS; label: string }) {
+  const m = MARKS[name];
+  const url = `url(${asset(`/img/logo-${name}.svg`)})`;
+  return (
+    <span
+      role="img"
+      aria-label={label}
+      className={`block bg-current ${m.w}`}
+      style={{ aspectRatio: `${m.vb[0]} / ${m.vb[1]}`, WebkitMaskImage: url, maskImage: url, WebkitMaskSize: "100% 100%", maskSize: "100% 100%", WebkitMaskRepeat: "no-repeat", maskRepeat: "no-repeat" }}
+    />
+  );
+}
+
 /* ── hero: showreel of his projects ──────────────────────────────────── */
 
 const SLIDES = [
   // Opens on the Coast sunset render (Tom didn't want the car shot first).
-  { src: "/img/coast-sunset-2400.webp", name: "Coast", place: "North Wollongong", pos: "60% 50%" },
-  { src: "/img/belmere-day.jpg", name: "Belmeré", place: "Wollongong", pos: "30% 50%" },
-  { src: "/img/luna-sand-2400.webp", name: "Luna", place: "Huskisson", pos: "50% 50%" },
-  { src: "/img/coast-ext-2400.webp", name: "Coast", place: "North Wollongong", pos: "40% 55%" },
-];
+  { src: "/img/coast-sunset-2400.webp", name: "Coast", place: "North Wollongong", pos: "60% 50%", logo: "coast" },
+  { src: "/img/belmere-day.jpg", name: "Belmeré", place: "Wollongong", pos: "30% 50%", logo: "belmere" },
+  { src: "/img/luna-sand-2400.webp", name: "Luna", place: "Huskisson", pos: "50% 50%", logo: "luna", ink: "#1b2a4a" },
+  { src: "/img/coast-ext-2400.webp", name: "Coast", place: "North Wollongong", pos: "40% 55%", logo: "coast" },
+] as const satisfies readonly { src: string; name: string; place: string; pos: string; logo: keyof typeof MARKS; ink?: string }[];
 const HOLD = 5200;
 
 export function Hero5({ typed = false }: { typed?: boolean } = {}) {
@@ -157,19 +179,28 @@ export function Hero5({ typed = false }: { typed?: boolean } = {}) {
       </AnimatePresence>
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.28)_0%,rgba(0,0,0,0)_22%,rgba(0,0,0,0)_62%,rgba(0,0,0,0.42)_100%)]" />
 
+      {/* Soft centre scrim so the white logos read on bright skies; off for ink logos. */}
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(42%_30%_at_50%_50%,rgba(0,0,0,0.32),rgba(0,0,0,0))]"
+        animate={{ opacity: "ink" in s ? 0 : 1 }}
+        transition={{ duration: 1.2 }}
+      />
+
       {/* Project name, centred, changes with the slide. */}
       <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
         <AnimatePresence mode="wait">
-          <motion.p
+          <motion.div
             key={s.name + i}
-            className="v5-serif text-[clamp(40px,7vw,104px)] uppercase tracking-[0.06em]"
+            className={"ink" in s ? "" : "drop-shadow-[0_2px_18px_rgba(0,0,0,0.3)]"}
+            style={"ink" in s ? { color: s.ink } : undefined}
             initial={{ opacity: 0, y: 14, filter: "blur(6px)" }}
             animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
             exit={{ opacity: 0, y: -10, filter: "blur(6px)" }}
             transition={{ duration: 0.9, ease: EASE }}
           >
-            {s.name}
-          </motion.p>
+            <BrandMark name={s.logo} label={`${s.name} logo`} />
+          </motion.div>
         </AnimatePresence>
       </div>
 
